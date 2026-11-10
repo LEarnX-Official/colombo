@@ -1,68 +1,72 @@
 {% extends "base.html" %}
-{% from "_macros.html" import cta, crumbs, video %}
+{% from "_macros.html" import cta, crumbs, video, lightarch %}
 {% block main %}
+{% set ck = proc_concern[p.key] %}
 <article>
-  <section class="phero phero--proc">
-    <div class="wrap phero__grid">
-      <div class="phero__text">
+  <section class="ph">
+    <div class="ph__bg" aria-hidden="true"></div>
+    <div class="wrap ph__grid">
+      <div>
         {{ crumbs([(t.home, P.home), (area.title, area.href), (p.title, "")]) }}
-        <p class="label" data-reveal>— {{ p.group }} · {{ '%02d' % index }}</p>
-        <h1 class="phero__h" data-lines>{{ p.title }}</h1>
-        <p class="phero__sub" data-reveal>{{ p.subtitle }}{% if lang != 'it' %} <span class="muted" lang="it">· {{ p.it }}</span>{% endif %}</p>
+        <p class="eyebrow" data-reveal>{{ L.concerns[ck][0] }} · {{ p.group }}</p>
+        <h1 class="h1" data-lines>{{ p.title }}</h1>
+        <p class="ph__sub" data-reveal>{{ p.subtitle }}{% if lang != 'it' %} · <span lang="it">{{ p.it }}</span>{% endif %}</p>
         <p class="lead" data-reveal>{{ p.lede }}</p>
+        <p data-reveal><button class="btn btn--dark" type="button" data-book>{{ t.book }}</button></p>
       </div>
-      <div class="phero__art">{{ drawing(p.drawing, 'phero__ln', mode='load') }}</div>
+      {{ lightarch(p.title, L.concerns[ck][1], 'ph__arch') }}
     </div>
   </section>
 
   {% if p.facts %}
   <section class="facts" aria-label="{{ t.key_facts }}">
     <div class="wrap">
+      <p class="eyebrow" data-reveal>— {{ L.facts_title }}</p>
       <dl class="facts__grid">
-        {% for k, v in p.facts %}
-        <div class="facts__item" data-reveal><dt>{{ k }}</dt><dd>{{ v }}</dd></div>
-        {% endfor %}
+        {% for k, v in p.facts %}<div class="fact" data-reveal><dt>{{ k }}</dt><dd>{{ v }}</dd></div>{% endfor %}
       </dl>
-      <p class="facts__note muted" data-reveal>{{ t.facts_note }}</p>
+      <p class="facts__note" data-reveal>{{ t.facts_note }}</p>
     </div>
   </section>
   {% endif %}
 
   <section class="prose-sec">
     <div class="wrap prose-sec__grid">
-      <p class="label prose-sec__label" data-reveal>{{ t.the_procedure }}</p>
-      <div class="prose">
-        {% for para in p.body %}<p data-reveal>{{ para }}</p>{% endfor %}
-      </div>
+      <p class="eyebrow" data-reveal>{{ t.the_procedure }}</p>
+      <div class="prose">{% for para in p.body %}<p data-reveal>{{ para }}</p>{% endfor %}</div>
     </div>
   </section>
 
   {% if p.quote %}
   <section class="pull">
     <div class="wrap">
-      <blockquote class="pull__q" data-reveal>
-        <p>“{{ p.quote }}”</p>
-        <footer>— Dr. Giuseppe Colombo{% if article %}, <a href="{{ article.href }}">{{ t.from_journal }}</a>{% endif %}</footer>
+      <blockquote class="pull__q">
+        <p data-focus>“{{ p.quote }}”</p>
+        <footer data-reveal>— Dr. Giuseppe Colombo{% if article %} · <a class="link" href="{{ article.href }}">{{ t.from_journal }}</a>{% endif %}</footer>
       </blockquote>
     </div>
   </section>
   {% endif %}
 
+  <section class="pj">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>{{ L.proc_journey }}</p>
+      <ol class="pj__steps">
+        {% for title, text in L.journey %}<li data-reveal><span class="pj__n">0{{ loop.index }}</span><h3>{{ title }}</h3><p>{{ text }}</p></li>{% endfor %}
+      </ol>
+    </div>
+  </section>
+
   {% if videos or article %}
-  <section class="more">
-    <div class="wrap more__grid">
-      {% for id, vt in videos %}
-      <div data-reveal>
-        <p class="label">{{ t.video_it }}</p>
-        {{ video(id, vt, t) }}
-      </div>
-      {% endfor %}
+  <section class="media">
+    <div class="wrap media__grid">
+      {% for id, vt in videos %}<div data-reveal><p class="eyebrow">{{ t.video_it }}</p>{{ video(id, vt, t) }}</div>{% endfor %}
       {% if article %}
       <a class="jcard jcard--feature" href="{{ article.href }}" data-reveal>
-        <span class="label">{{ t.from_journal_label }} · {{ article.minutes }} {{ t.min }}{% if t.in_italian %} · {{ t.in_italian }}{% endif %}</span>
+        <span class="jcard__k">{{ t.from_journal_label }} · {{ article.minutes }} {{ t.min }}{% if t.in_italian %} · {{ t.in_italian }}{% endif %}</span>
         <h2 class="jcard__h">{{ article.title }}</h2>
         {% if lang != 'it' %}<p class="jcard__it" lang="it">{{ article.it_title }}</p>{% endif %}
-        <span class="arrowlink">{{ t.read_article }} <span aria-hidden="true">→</span></span>
+        <span class="link">{{ t.read_article }} <span aria-hidden="true">→</span></span>
       </a>
       {% endif %}
     </div>
@@ -70,13 +74,11 @@
   {% endif %}
 </article>
 
-<section class="siblings">
+<section class="sib">
   <div class="wrap">
-    <p class="label" data-reveal>{{ t.also_in }} · {{ area.title }}</p>
-    <ul class="siblings__list">
-      {% for s in siblings %}
-      <li data-reveal><a href="{{ s.href }}"><span>{{ s.title }}</span><span class="muted">{{ s.subtitle }}</span><span class="arrow" aria-hidden="true">→</span></a></li>
-      {% endfor %}
+    <p class="eyebrow" data-reveal>{{ t.also_in }} · {{ area.title }}</p>
+    <ul class="sib__list">
+      {% for s in siblings %}<li data-reveal><a href="{{ s.href }}"><span class="sib__t">{{ s.title }}</span><span class="sib__s">{{ s.subtitle }}</span><span aria-hidden="true">→</span></a></li>{% endfor %}
     </ul>
   </div>
 </section>

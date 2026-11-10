@@ -1,14 +1,14 @@
 {% extends "base.html" %}
+{% from "_macros.html" import glow %}
 {% block main %}
 <section class="nf">
-  <div class="wrap nf__grid">
-    <div class="nf__art">{{ drawing('doctor', 'nf__ln', mode='load') }}</div>
-    <div>
-      <p class="label">— 404</p>
-      <h1 class="h1" data-lines>{{ t.nf_h_html|safe }}</h1>
-      <p class="lead">{{ t.nf_p }}</p>
-      <p class="nf__langs"><a class="btn btn--line" href="/">Home</a> <a class="arrowlink" href="/de/">Startseite</a> · <a class="arrowlink" href="/en/">Home (EN)</a></p>
-    </div>
+  {{ glow('warm', 'nf__glow') }}
+  <div class="wrap nf__in">
+    {{ monogram('nf__mono') }}
+    <p class="eyebrow">404</p>
+    <h1 class="h1" data-lines>{{ t.nf_h_html|safe }}</h1>
+    <p class="lead">{{ t.nf_p }}</p>
+    <p class="nf__links"><a class="btn btn--dark" href="/">Home</a> <a class="link" href="/de/">Startseite</a> <a class="link" href="/en/">Home (EN)</a></p>
   </div>
 </section>
 {% endblock %}

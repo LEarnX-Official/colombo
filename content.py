@@ -695,3 +695,62 @@ HOME = {
     "convo_h_pre": "Begin with a", "convo_word": "conversation",
     "convo_lead": "Tell us what you would like to discuss. The secretary's office answers {hours}.",
 }
+
+# ==========================================================================
+# Design "Luce naturale" — patient-first storyline (shared structure)
+# ==========================================================================
+# Patient concerns -> procedures (keys). "restore" links to the reconstructive page.
+CONCERNS = [
+    ("face", ["facelift", "chin"]),
+    ("eyes", ["blepharoplasty", "brow-lift", "botulinum-toxin"]),
+    ("lips", ["lip-lift"]),
+    ("skin", ["hyaluronic-acid", "biorevitalisation"]),
+    ("ears", ["otoplasty"]),
+    ("breast", ["mastopexy", "augmentation", "reduction", "gynecomastia"]),
+    ("restore", []),
+]
+PROC_CONCERN = {p: c for c, ps in CONCERNS for p in ps}
+
+LUCE = {
+    "kicker": "Dr. Giuseppe Colombo · Plastic surgery · Lugano",
+    "nat_label": "— Naturalness",
+    "nat_word": "naturalness",
+    "nat_lead": "One word guides his practice.",
+    "nat_never": ["Never give in to excess.", "Never distort people.", "Only bring out the best in them."],
+    "meet": "Meet Dr. Colombo",
+    "concern_label": "— Where to begin",
+    "concern_h_html": "What would you like to <em>refine</em>?",
+    "concern_lead": "Choose an area. Each treatment is explained in Dr. Colombo's own words.",
+    "concerns": {
+        "face": ("Face & neck", "Lower face, neck and profile"),
+        "eyes": ("The eyes", "Eyelids, brows and expression lines"),
+        "lips": ("The lips", "Shape and definition of the upper lip"),
+        "skin": ("The skin", "Hydration, tone and luminosity"),
+        "ears": ("The ears", "Shape and position of the ear"),
+        "breast": ("The breast", "Lift, volume, reduction — and the male chest"),
+        "restore": ("Reconstruction", "The face after skin-cancer surgery"),
+    },
+    "see_all": "All treatments",
+    "journey_label": "— The journey",
+    "journey_h_html": "From the first conversation<br>to a <em>natural</em> result.",
+    "journey": [
+        ("Consultation", "A first conversation in Lugano, Zurich or Italy — your wishes, your anatomy, your questions."),
+        ("A plan for you", "Every case is assessed individually. The procedure is chosen for you — never for a trend."),
+        ("Surgery in Lugano", "Clinica Sant'Anna — practice and operating theatre under one roof."),
+        ("Recovery", "It depends on the procedure: after eyelid surgery, for example, a normal appearance returns in 7–10 days."),
+        ("A natural result", "Tissues settle slowly over the months — for the eyelids, the final result is judged after about one year."),
+    ],
+    "trust_label": "— Experience",
+    "trust_h_html": "Trained by masters.<br><em>Teaching</em> colleagues.",
+    "trust": [
+        ("2005", "Degree in Medicine, Genoa", "110/110 cum laude — then specialisation, 50/50 cum laude, and a Ph.D."),
+        ("320+", "original photographs", "in the Springer atlas of aesthetic medicine and surgery he edited."),
+        ("19", "publications", "in international journals, from 2008 to 2021."),
+        ("2010", "dissection courses", "directed for surgeons in Nice, Madrid and Cremona since 2010."),
+    ],
+    "trust_more": "Discover the Academy",
+    "place_label": "— The place",
+    "proc_journey": "— Your journey",
+    "facts_title": "In brief",
+    "concern_word": "Area",
+}

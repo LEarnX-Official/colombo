@@ -1,158 +1,171 @@
 {% extends "base.html" %}
+{% from "_macros.html" import glow, arch, portrait, lightarch %}
 {% block main %}
 
-{# ===================== SCENE 1 · THE LINE ===================== #}
-<section class="s1 hero" aria-labelledby="hero-title">
+{# ===== 1 · LUCE — Il giusto è il più bello ===== #}
+<section class="hero" aria-labelledby="hero-title">
+  {{ glow('warm', 'hero__glow') }}
   <div class="wrap hero__grid">
     <div class="hero__text">
-      <p class="label" data-reveal>{{ h.kicker }}</p>
-      <h1 id="hero-title" class="hero__title" lang="it" data-lines data-manual>Il giusto è<br>il più <em>bello</em>.</h1>
-      <p class="hero__en" data-reveal>{{ h.hero_line_html|safe }}</p>
-      <p class="hero__sub" data-reveal>{{ h.hero_sub }}<br><span class="muted">{% for loc in locations %}{{ loc.city }}{% if not loop.last %} · {% endif %}{% endfor %}</span></p>
+      <p class="eyebrow" data-hero-in>{{ L.kicker }}</p>
+      <h1 id="hero-title" class="hero__title" lang="it"><span class="hl"><span>Il giusto è</span></span><span class="hl"><span>il più <em>bello</em>.</span></span></h1>
+      <p class="hero__line" data-hero-in>{% if quotes.measure_en %}<em>{{ quotes.measure_en }}</em><br>{% endif %}{{ h.hero_sub }}</p>
+      <div class="hero__cta" data-hero-in>
+        <button class="btn btn--dark" type="button" data-book>{{ t.book }}</button>
+        <a class="link" href="#tratt">{{ L.see_all }} <span aria-hidden="true">↓</span></a>
+      </div>
     </div>
-    <div class="hero__art">{{ drawing('face-woman', 'hero__ln', mode='load') }}</div>
+    <div class="hero__media">
+      {{ portrait(t, 'hero__arch', eager=True) }}
+      <p class="hero__badge" data-hero-in><span>Clinica Sant'Anna</span>Lugano · {% for loc in locations[1:] %}{{ loc.city }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+    </div>
   </div>
-  <div class="scrollhint" aria-hidden="true"><span>Scroll</span><i></i></div>
+  <p class="hero__cue" aria-hidden="true"><i></i></p>
 </section>
 
-{# ===================== SCENE 2 · FROM LINE TO PERSON ===================== #}
-<section class="s2 doc" data-theme="dark" aria-labelledby="doc-title">
-  <div class="doc__pin">
-    <div class="wrap doc__grid">
-      <figure class="doc__frame">
-        <img class="doc__photo" src="/assets/img/portrait-a-800.webp"
-             srcset="/assets/img/portrait-a-800.webp 800w, /assets/img/portrait-a-1400.webp 1400w"
-             sizes="(min-width: 900px) 38vw, 88vw" width="1483" height="1920"
-             alt="{{ t.portrait_alt }}" loading="lazy">
-        {{ doctor_svg() }}
-      </figure>
-      <div class="doc__text">
-        <p class="label">{{ h.philosophy }}</p>
-        <h2 id="doc-title" class="doc__h" lang="it">Odia l'eccesso,<br>rispetta il <em>limite</em>.</h2>
-        {% if h.doc_tr %}<p class="doc__en">{{ h.doc_tr }}</p>{% endif %}
-        <blockquote class="doc__q"><p>“{{ quotes.naturalness }}”</p></blockquote>
-        <div class="doc__sign">{{ drawing('logo-script', 'doc__script', mode='none', fill=True, label='Dr. Colombo') }}</div>
-        <a class="arrowlink" href="{{ P.philosophy }}">{{ h.meet }} <span aria-hidden="true">→</span></a>
-      </div>
+{# ===== 2 · NATURALEZZA — soft focus becomes clarity ===== #}
+<section class="nat" aria-labelledby="nat-title">
+  <div class="nat__pin">
+    <div class="nat__light" aria-hidden="true"></div>
+    <div class="wrap nat__inner">
+      <p class="eyebrow nat__label">{{ L.nat_label }}</p>
+      <p class="nat__lead">{{ L.nat_lead }}</p>
+      <h2 id="nat-title" class="nat__word"><em>{{ L.nat_word }}</em></h2>
+      <ul class="nat__never">{% for line in L.nat_never %}<li>{{ line }}</li>{% endfor %}</ul>
+      <p class="nat__sign">— Dr. Giuseppe Colombo · <a class="link" href="{{ P.philosophy }}">{{ L.meet }} <span aria-hidden="true">→</span></a></p>
     </div>
   </div>
 </section>
 
-{# ===================== SCENE 3 · BENEATH THE SURFACE ===================== #}
-<section class="s3 anat" aria-labelledby="anat-title">
-  <div class="anat__pin">
-    <div class="wrap anat__grid">
-      <div class="anat__stage" aria-hidden="true">
-        <div class="anat__face">{{ drawing('profile-jaw', 'anat__ln', mode='scene') }}</div>
-        <div class="anat__x">{{ anatomy_svg() }}</div>
-      </div>
-      <div class="anat__copy">
-        <p class="label">{{ h.beneath }}</p>
-        <h2 id="anat-title" class="visually-hidden">{{ h.layers_h }}</h2>
-        <ol class="anat__steps">
-          {% for n, head, text in h.steps %}
-          <li{% if loop.first %} class="is-active"{% endif %}><span class="n">{{ n }}</span><h3>{{ head }}</h3><p>{{ text }}</p></li>
-          {% endfor %}
-        </ol>
-        <p class="anat__close">{{ h.anat_close_html|safe }}</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-{# ===================== SCENE 4 · TWO AREAS ===================== #}
-<section class="s4 areas" aria-labelledby="areas-title">
+{# ===== 3 · WHERE TO BEGIN — the patient's concern ===== #}
+<section class="cn" id="tratt" aria-labelledby="cn-title">
   <div class="wrap">
-    <div class="areas__head">
-      <p class="label" data-reveal>{{ h.areas_label }}</p>
-      <h2 id="areas-title" class="h1" data-lines>{{ h.areas_h_html|safe }}</h2>
-      <p class="lead" data-reveal>{{ h.areas_lead }}</p>
+    <div class="cn__head">
+      <p class="eyebrow" data-reveal>{{ L.concern_label }}</p>
+      <h2 id="cn-title" class="h2" data-lines>{{ L.concern_h_html|safe }}</h2>
+      <p class="lead" data-reveal>{{ L.concern_lead }}</p>
     </div>
-    <div class="areas__grid">
-      {% for key, art, list in [('face', 'face-woman', h.face_list), ('breast', 'breast-pair', h.breast_list)] %}
-      <a class="acard" href="{{ P[key] }}">
-        <div class="acard__art">{{ drawing(art, 'acard__ln', mode='enter') }}</div>
-        <div class="acard__body">
-          <span class="label">— 0{{ loop.index }}</span>
-          <h3 class="acard__h">{{ nav[loop.index].label }}</h3>
-          <p class="acard__list">{{ list }}</p>
-          <span class="arrowlink">{{ t.discover }} <span aria-hidden="true">→</span></span>
+    <div class="cn__grid" data-concerns>
+      <div class="cn__tabs" role="tablist" aria-label="{{ L.concern_word }}">
+        {% for key, plist in concerns %}
+        <button class="cn__tab{% if loop.first %} is-active{% endif %}" role="tab" id="cnt-{{ key }}" aria-controls="cnp-{{ key }}" aria-selected="{{ 'true' if loop.first else 'false' }}" data-concern="{{ key }}" type="button">
+          <span class="cn__n">0{{ loop.index }}</span>
+          <span class="cn__t">{{ L.concerns[key][0] }}</span>
+          <span class="cn__s">{{ L.concerns[key][1] }}</span>
+        </button>
+        {% endfor %}
+      </div>
+      <div class="cn__stage">
+        {% for key, plist in concerns %}
+        <div class="cn__panel{% if loop.first %} is-active{% endif %}" role="tabpanel" id="cnp-{{ key }}" aria-labelledby="cnt-{{ key }}" data-panel="{{ key }}"{% if not loop.first %} hidden{% endif %}>
+          {{ lightarch(L.concerns[key][0], L.concerns[key][1], 'cn__arch') }}
+          <ul class="cn__list">
+            {% if plist %}
+              {% for pk in plist %}{% set p = procs[pk] %}
+              <li><a href="{{ p.href }}"><span class="cn__pt">{{ p.title }}</span><span class="cn__pi">{{ p.subtitle }}</span><span class="cn__pl">{{ p.lede }}</span><span class="cn__a" aria-hidden="true">→</span></a></li>
+              {% endfor %}
+            {% else %}
+              <li><a href="{{ P.reconstructive }}"><span class="cn__pt">{{ rec.title }}</span><span class="cn__pl">{{ rec.lede }}</span><span class="cn__a" aria-hidden="true">→</span></a></li>
+            {% endif %}
+          </ul>
         </div>
-      </a>
-      {% endfor %}
-    </div>
-    <a class="arrowlink areas__more" href="{{ P.reconstructive }}" data-reveal>{{ h.recon_link }} <span aria-hidden="true">→</span></a>
-  </div>
-</section>
-
-{# ===================== SCENE 5 · TEACHER & AUTHOR ===================== #}
-<section class="s5 atlas" aria-labelledby="atlas-title">
-  <div class="wrap atlas__grid">
-    <div class="atlas__book" data-tilt>
-      <div class="book">
-        <img src="/assets/img/atlas-springer-800.webp" width="800" height="1060" loading="lazy" alt="{{ h.atlas_alt }}">
-        <span class="book__edge" aria-hidden="true"></span>
+        {% endfor %}
       </div>
     </div>
-    <div class="atlas__text">
-      <p class="label" data-reveal>{{ h.teacher }}</p>
-      <h2 id="atlas-title" class="h1" data-lines>{{ h.teacher_h_html|safe }}</h2>
-      <p class="lead" data-reveal>{{ h.atlas_lead_html.replace('{title}', atlas.title).replace('{publisher}', atlas.publisher)|safe }}</p>
-      <ul class="facts-row" data-reveal>
-        {% for a, b in h.facts %}<li><span>{{ a }}</span>{{ b }}</li>{% endfor %}
-      </ul>
-      <p class="atlas__links" data-reveal>
-        <a class="arrowlink" href="{{ P.academy }}">{{ h.discover_academy }} <span aria-hidden="true">→</span></a>
-        <a class="arrowlink" href="{{ atlas.url }}" target="_blank" rel="noopener">{{ t.view_springer }}</a>
-      </p>
+  </div>
+</section>
+
+{# ===== 4 · THE JOURNEY — a line of light from conversation to result ===== #}
+<section class="jr" aria-labelledby="jr-title">
+  <div class="wrap jr__grid">
+    <div class="jr__head">
+      <p class="eyebrow" data-reveal>{{ L.journey_label }}</p>
+      <h2 id="jr-title" class="h2" data-lines>{{ L.journey_h_html|safe }}</h2>
+      <button class="btn btn--line" type="button" data-book data-reveal>{{ t.book }}</button>
+    </div>
+    <ol class="jr__steps" data-journey>
+      <span class="jr__rail" aria-hidden="true"><i data-journey-line></i></span>
+      {% for title, text in L.journey %}
+      <li class="jr__step" data-step>
+        <span class="jr__dot" aria-hidden="true"></span>
+        <span class="jr__n">0{{ loop.index }}</span>
+        <h3 class="jr__t">{{ title }}</h3>
+        <p class="jr__p">{{ text }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+{# ===== 5 · EXPERIENCE — trust ===== #}
+<section class="tr" aria-labelledby="tr-title">
+  <div class="wrap tr__grid">
+    <div class="tr__media">
+      <div class="tr__book" data-tilt>
+        <img src="/assets/img/atlas-springer-800.webp" width="800" height="1060" loading="lazy" alt="{{ h.atlas_alt }}">
+      </div>
+    </div>
+    <div class="tr__text">
+      <p class="eyebrow" data-reveal>{{ L.trust_label }}</p>
+      <h2 id="tr-title" class="h2" data-lines>{{ L.trust_h_html|safe }}</h2>
+      <dl class="tr__list">
+        {% for num, k, d in L.trust %}
+        <div class="tr__item" data-reveal>
+          <dt><span class="tr__num"{% if num in ['320+', '19'] %} data-count="{{ num|replace('+', '') }}" data-suffix="{{ '+' if '+' in num else '' }}"{% endif %}>{{ num }}</span><span class="tr__k">{{ k }}</span></dt>
+          <dd>{{ d }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+      <a class="link" href="{{ P.academy }}" data-reveal>{{ L.trust_more }} <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
-{# ===================== SCENE 6 · DISCRETION ===================== #}
-<section class="s6 still" aria-label="{{ h.discretion_aria }}">
-  <div class="wrap still__inner">
-    <p class="label">{{ h.discretion }}</p>
-    <blockquote class="still__q">
-      <p class="still__it" lang="it">“{{ quotes.discretion_it }}”</p>
-      {% if quotes.discretion_en %}<p class="still__en">{{ quotes.discretion_en }}</p>{% endif %}
+{# ===== 6 · DISCRETION ===== #}
+<section class="dq" aria-label="{{ h.discretion_aria }}">
+  <div class="wrap dq__grid">
+    {{ arch('/assets/img/portrait-b-900.webp', t.smile_alt, 900, 1165, 'dq__arch') }}
+    <blockquote class="dq__q">
+      <p class="eyebrow">{{ h.discretion }}</p>
+      <p class="dq__it" lang="it" data-focus>“{{ quotes.discretion_it }}”</p>
+      {% if quotes.discretion_en %}<p class="dq__tr" data-reveal>{{ quotes.discretion_en }}</p>{% endif %}
     </blockquote>
   </div>
 </section>
 
-{# ===================== SCENE 7 · LUGANO ===================== #}
-<section class="s7 lugano" data-theme="dark" aria-labelledby="lugano-title">
-  <div class="lugano__pin">
-    <div class="lugano__sky" aria-hidden="true"></div>
-    {{ lake_svg() }}
-    <div class="lugano__text wrap">
-      <p class="label">{{ h.place }}</p>
-      <h2 id="lugano-title" class="lugano__h">{{ h.lugano_h_html|safe }}</h2>
-      <p class="lugano__p">{{ h.lugano_p }}</p>
+{# ===== 7 · LUGANO — a window on the lake ===== #}
+<section class="lg" aria-labelledby="lg-title">
+  <div class="lg__pin">
+    <div class="lg__window" data-lake-window>
+      {{ glow('lake', 'lg__glow') }}
+      <div class="lg__text">
+        <p class="eyebrow">{{ L.place_label }}</p>
+        <h2 id="lg-title" class="lg__h">Lugano</h2>
+        <p class="lg__p">{{ h.lugano_p }}</p>
+      </div>
     </div>
   </div>
-  <div class="wrap lugano__cards">
+  <div class="wrap lg__cards">
     {% for loc in locations %}
-    <div class="lcard" data-reveal>
-      <span class="label">— 0{{ loop.index }}</span>
-      <h3 class="lcard__h">{{ loc.city }}</h3>
-      <p class="lcard__role">{{ loc.role }}</p>
+    <div class="loc" data-reveal>
+      <span class="loc__n">0{{ loop.index }}</span>
+      <h3 class="loc__h">{{ loc.city }}</h3>
+      <p class="loc__role">{{ loc.role }}</p>
       {% for l in loc.lines %}<p>{{ l }}</p>{% endfor %}
     </div>
     {% endfor %}
   </div>
 </section>
 
-{# ===================== SCENE 8 · CONVERSATION ===================== #}
-<section class="s8 convo" aria-labelledby="convo-title">
-  <div class="wrap convo__inner">
-    <div class="convo__portrait" data-reveal>
-      <img src="/assets/img/portrait-a-320.webp" width="320" height="414" alt="" loading="lazy">
-    </div>
-    <p class="label" data-reveal>{{ t.first_step }}</p>
-    <h2 id="convo-title" class="convo__h" data-lines>{{ h.convo_h_pre }} <span class="u">{{ h.convo_word }}<svg viewBox="0 0 600 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 C 150 6, 300 16, 598 8"/></svg></span>.</h2>
+{# ===== 8 · BEGIN WITH A CONVERSATION ===== #}
+<section class="cv" aria-labelledby="cv-title">
+  {{ glow('warm', 'cv__glow') }}
+  <div class="wrap cv__inner">
+    {{ monogram('cv__mono') }}
+    <p class="eyebrow" data-reveal>{{ t.first_step }}</p>
+    <h2 id="cv-title" class="h1" data-lines>{{ h.convo_h_pre }} <em>{{ h.convo_word }}</em>.</h2>
     <p class="lead" data-reveal>{{ h.convo_lead.replace('{hours}', site.hours) }}</p>
-    <div class="convo__opts">
+    <div class="cv__opts">
       {% for loc in locations %}
       <button type="button" class="opt" data-book data-book-location="{{ loc.key }}" data-reveal>
         <span class="opt__h">{{ loc.city }}</span>
@@ -161,7 +174,7 @@
       </button>
       {% endfor %}
     </div>
-    <p class="convo__alt" data-reveal>{{ t.bk_or_call }} <a href="tel:{{ site.phones[0].tel }}">{{ site.phones[0].display }}</a> · <a href="tel:{{ site.phones[1].tel }}">{{ site.phones[1].display }}</a> · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    <p class="cv__alt" data-reveal>{{ t.bk_or_call }} <a href="tel:{{ site.phones[0].tel }}">{{ site.phones[0].display }}</a> · <a href="tel:{{ site.phones[1].tel }}">{{ site.phones[1].display }}</a> · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
   </div>
 </section>
 {% endblock %}
