@@ -446,3 +446,25 @@ HOME = {
     "convo_h_pre": "Beginnen Sie mit einem", "convo_word": "Gespräch",
     "convo_lead": "Sagen Sie uns, worüber Sie sprechen möchten. Das Sekretariat antwortet {hours}.",
 }
+
+STORY = {
+    "loader": "Kalibrierung",
+    "plates": ["Maß", "Gesicht", "Brust", "Rekonstruktion", "Atlas", "Lehre", "Diskretion", "Lugano"],
+    "fig1": "ABB. 1 — Dr. Giuseppe Colombo, Lugano",
+    "thirds_labels": {"upper": "Oberes Drittel", "middle": "Mittleres Drittel", "lower": "Unteres Drittel"},
+    "thirds_desc": {"upper": "Stirn, Brauen, Augen", "middle": "Wangen, Nase, Ohren", "lower": "Lippen, Kinn, Kiefer und Hals"},
+    "first_measure_html": "Erst <em>messen</em>.<br>Dann Maß halten.",
+    "face_h_html": "Das Gesicht, <em>in Dritteln.</em>",
+    "face_note": "Nach Dr. Colombos eigener Beschreibung des Gesichts in Dritteln.",
+    "breast_h_html": "Die Brust, <em>mit Maß.</em>",
+    "breast_figs": {"mastopexy": ("↑", "Anheben und neu formen"), "augmentation": ("+", "Volumen — nie aus Mode"),
+                    "reduction": ("4–5", "Größen kleiner"), "gynecomastia": ("20–40", "das typische Alter")},
+    "restore_h_html": "<em>Form</em> und Funktion wiederherstellen.",
+    "atlas_h_html": "Der Atlas <em>und die Publikationen.</em>",
+    "photos": "Originalfotografien", "part1": "Teil I — Theorie", "part2": "Teil II — Praxis",
+    "pubs_n": "Publikationen", "years": "Jahre Forschung", "reviewer": "Zeitschriften als Gutachter",
+    "teach_h_html": "Lehren, <em>Stadt für Stadt.</em>",
+    "early": "Geleitete Präparationskurse in Nizza und Madrid",
+    "today": "Heute",
+    "lugano_coords": "Clinica Sant'Anna",
+}

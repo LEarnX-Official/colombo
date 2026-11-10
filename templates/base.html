@@ -9,61 +9,58 @@
 {% if meta %}<meta property="og:description" content="{{ meta }}">{% endif %}
 <meta property="og:image" content="/assets/img/portrait-a-1400.webp">
 <meta property="og:locale" content="{{ {'it': 'it_IT', 'de': 'de_CH', 'en': 'en_GB'}[lang] }}">
-<meta name="theme-color" content="#F6F2EA">
+<meta name="theme-color" content="#21090F">
 {% if body_class != 'page-404' %}<link rel="canonical" href="{{ site_url }}{{ alts[lang] }}">
 {% endif %}{% for l, u in alts.items() %}<link rel="alternate" hreflang="{{ l }}" href="{{ site_url }}{{ u }}">
 {% endfor %}<link rel="alternate" hreflang="x-default" href="{{ site_url }}{{ alts['it'] }}">
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
-<link rel="preload" href="/assets/fonts/cormorant-garamond-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css?v={{ v }}">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3500);window.I18N={{ js_i18n|safe }};</script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Physician","name":"Dr. Giuseppe Colombo","medicalSpecialty":"PlasticSurgery","url":"{{ site.url }}","email":"{{ site.email }}","telephone":"{{ site.phones[0].tel }}","address":{"@type":"PostalAddress","streetAddress":"Via Sant'Anna 1","addressLocality":"Lugano","addressCountry":"CH"},"sameAs":[{% for s in site.social %}"{{ s.url }}"{% if not loop.last %},{% endif %}{% endfor %}]}
+{"@context":"https://schema.org","@type":"Physician","name":"Dr. Giuseppe Colombo","medicalSpecialty":"PlasticSurgery","url":"{{ site_url }}","email":"{{ site.email }}","telephone":"{{ site.phones[0].tel }}","address":{"@type":"PostalAddress","streetAddress":"Via Sant'Anna 1","addressLocality":"Lugano","addressCountry":"CH"},"sameAs":[{% for s in site.social %}"{{ s.url }}"{% if not loop.last %},{% endif %}{% endfor %}]}
 </script>
 </head>
 <body class="{{ body_class }}">
 <a class="skip" href="#main">{{ t.skip }}</a>
-
-<div class="pt" aria-hidden="true"><span class="pt__mark">{{ drawing('symbol', 'pt__symbol', mode='none', fill=True) }}</span></div>
-<div class="cursor" aria-hidden="true"></div>
+{% from "_macros.html" import mono %}
+{% block loader %}{% endblock %}
+<div class="pt" aria-hidden="true">{{ mono('pt__mono') }}</div>
 
 {% macro langswitch(cls) %}
 <nav class="lang {{ cls }}" aria-label="{{ t.language }}">
-  {% for l in ['it', 'de', 'en'] %}
-  <a class="lang__item{% if l == lang %} is-active{% endif %}" href="{{ alts[l] }}" hreflang="{{ l }}" lang="{{ l }}"{% if l == lang %} aria-current="true"{% endif %} title="{{ {'it': 'Italiano', 'de': 'Deutsch', 'en': 'English'}[l] }}">{{ l|upper }}</a>{% if not loop.last %}<span class="lang__sep" aria-hidden="true">·</span>{% endif %}
-  {% endfor %}
+  {% for l in ['it', 'de', 'en'] %}<a class="lang__item{% if l == lang %} is-active{% endif %}" href="{{ alts[l] }}" hreflang="{{ l }}" lang="{{ l }}"{% if l == lang %} aria-current="true"{% endif %} title="{{ {'it': 'Italiano', 'de': 'Deutsch', 'en': 'English'}[l] }}">{{ l|upper }}</a>{% endfor %}
 </nav>
 {% endmacro %}
 
 <header class="hdr" data-hdr>
   <a class="hdr__brand" href="{{ P.home }}" aria-label="{{ t.home_aria }}">
-    {{ drawing('symbol', 'hdr__symbol', mode='none', fill=True) }}
-    <span class="hdr__name">Giuseppe Colombo</span>
+    {{ mono('hdr__mono') }}
+    <span class="hdr__name">Giuseppe Colombo<small>{{ t.suffix.split('·')[1]|trim }}</small></span>
   </a>
   <nav class="hdr__nav" aria-label="Main">
     {% for item in nav %}
-    <a href="{{ item.href }}" class="hdr__link{% if current.startswith(item.href) %} is-active{% endif %}"{% if current.startswith(item.href) %} aria-current="page"{% endif %}>{{ item.label }}</a>
+    <a href="{{ item.href }}" class="hdr__link{% if current.startswith(item.href) %} is-active{% endif %}"{% if current.startswith(item.href) %} aria-current="page"{% endif %}><span class="hdr__n">0{{ loop.index }}</span>{{ item.label }}</a>
     {% endfor %}
   </nav>
   <div class="hdr__tools">
     {{ langswitch('lang--hdr') }}
-    <button class="btn btn--line btn--sm hdr__book" type="button" data-book>{{ t.book }}</button>
-    <button class="hdr__menu" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>{{ t.menu }}</button>
+    <button class="btn btn--solid btn--sm hdr__book" type="button" data-book>{{ t.book }}</button>
+    <button class="hdr__menu" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle><span class="hdr__menu-t">{{ t.menu }}</span><i aria-hidden="true"></i></button>
   </div>
 </header>
 
 <div class="menu" id="menu" aria-hidden="true" data-menu>
   <nav class="menu__nav" aria-label="Mobile">
-    <a href="{{ P.home }}" class="menu__link">{{ t.home }}</a>
-    {% for item in nav %}<a href="{{ item.href }}" class="menu__link">{{ item.label }}</a>{% endfor %}
+    <a href="{{ P.home }}" class="menu__link"><span>00</span>{{ t.home }}</a>
+    {% for item in nav %}<a href="{{ item.href }}" class="menu__link"><span>0{{ loop.index }}</span>{{ item.label }}</a>{% endfor %}
   </nav>
   <div class="menu__foot">
     {{ langswitch('lang--menu') }}
     <p>Clinica Sant'Anna · Lugano</p>
     <p>{% for ph in site.phones %}<a href="tel:{{ ph.tel }}">{{ ph.display }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
-    <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-    <button class="btn btn--line" type="button" data-book>{{ t.book }}</button>
+    <button class="btn btn--solid" type="button" data-book>{{ t.book }}</button>
   </div>
 </div>
 
@@ -71,7 +68,7 @@
 {% block main %}{% endblock %}
 </main>
 
-<footer class="ftr" data-theme="dark">
+<footer class="ftr">
   <div class="ftr__cta wrap">
     <p class="label">{{ t.first_step }}</p>
     <button type="button" class="ftr__big" data-book>{{ t.begin_html|safe }}<span class="arrow" aria-hidden="true">→</span></button>
@@ -79,25 +76,28 @@
   <div class="ftr__grid wrap">
     {% for loc in site.locations %}
     <div class="ftr__col">
+      <p class="label">0{{ loop.index }} · {{ loc.role }}</p>
       <h3 class="ftr__h">{{ loc.city }}</h3>
-      <p class="ftr__role">{{ loc.role }}</p>
       {% for l in loc.lines %}<p>{{ l }}</p>{% endfor %}
       {% if loc.extra %}<p class="muted">{{ loc.extra }}</p>{% endif %}
     </div>
     {% endfor %}
     <div class="ftr__col">
+      <p class="label">04 · {{ site.hours }}</p>
       <h3 class="ftr__h">{{ t.contact }}</h3>
-      <p class="ftr__role">{{ site.hours }}</p>
       {% for ph in site.phones %}<p><a href="tel:{{ ph.tel }}">{{ ph.display }}</a></p>{% endfor %}
       <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
     </div>
   </div>
-  <div class="ftr__logo wrap">{{ drawing('logo-script', 'ftr__script', mode='none', fill=True, label='Dr. Colombo — Chirurgia plastica') }}</div>
+  <div class="ftr__sign wrap">
+    {{ mono('ftr__mono') }}
+    <p class="ftr__motto" lang="it">{{ quotes.measure_it }}</p>
+  </div>
   <div class="ftr__bar wrap">
     <span>© {{ year }} Dr. Giuseppe Colombo</span>
     {{ langswitch('lang--ftr') }}
     <span class="ftr__social">{% for s in site.social %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a>{% endfor %}</span>
-    <span class="ftr__clock">Lugano <time data-clock>--:--</time></span>
+    <span>Lugano <time data-clock>--:--</time> · 46.00° N</span>
   </div>
 </footer>
 

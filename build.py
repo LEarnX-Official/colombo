@@ -31,132 +31,53 @@ env = Environment(
     lstrip_blocks=True,
 )
 
-# ----------------------------------------------------------------- drawings
-DRAWINGS = {}
-for f in (ROOT / "data" / "drawings").glob("*.json"):
-    DRAWINGS[f.stem] = json.loads(f.read_text())
+# ------------------------------------------------------------ illustrations
+def map_svg():
+    """Minimal 'instrument' map: a lat/long graticule with the real positions of the
+    cities in Dr. Colombo's career. Cities outside the frame (Madrid) sit on the edge with an arrow."""
+    lon0, lon1, lat0, lat1 = 6.4, 10.9, 43.3, 47.8
+    W, H = 1000, 700
+
+    def xy(lat, lon):
+        x = (lon - lon0) / (lon1 - lon0) * W
+        y = (lat1 - lat) / (lat1 - lat0) * H
+        return x, y
+
+    parts = ['<svg class="map" viewBox="-40 -20 1080 760" role="img" aria-label="Map">']
+    for lon in range(7, 11):
+        x, _ = xy(0, lon)
+        parts.append(f'<path class="map__grid" d="M{x:.1f} 0 V{H}"/><text class="map__deg" x="{x + 6:.1f}" y="{H - 10}">{lon}°E</text>')
+    for lat in range(44, 48):
+        _, y = xy(lat, 0)
+        parts.append(f'<path class="map__grid" d="M0 {y:.1f} H{W}"/><text class="map__deg" x="8" y="{y - 8:.1f}">{lat}°N</text>')
+    pts, off = {}, set()
+    for key, c in C.CITIES.items():
+        x, y = xy(c["lat"], c["lon"])
+        if x < 0 or x > W or y < 0 or y > H:
+            off.add(key)
+            x, y = min(max(x, 0), W), min(max(y, 0), H)
+        pts[key] = (x, y)
+    route = C.ROUTE
+    for n, (a, b) in enumerate(zip(route, route[1:])):
+        (x1, y1), (x2, y2) = pts[a], pts[b]
+        mx, my = (x1 + x2) / 2, (y1 + y2) / 2 - max(60, (abs(x2 - x1) + abs(y2 - y1)) * 0.3)
+        parts.append(f'<path class="map__arc" data-arc="{n}" d="M{x1:.1f} {y1:.1f} Q{mx:.1f} {my:.1f} {x2:.1f} {y2:.1f}"/>')
+    label_dx = {"savona": (-14, 34, "end"), "genoa": (16, 30, "start"), "nice": (-16, -16, "end"), "zurich": (16, -14, "start")}
+    for key, (x, y) in pts.items():
+        c = C.CITIES[key]
+        dx, dy, anchor = label_dx.get(key, (16, -14, "start"))
+        name = ("← " + c["name"]) if key in off else c["name"]
+        if key in off:
+            dx, dy, anchor = 10, 34, "start"
+        parts.append(f'<g class="map__city" data-city="{key}"><circle class="map__ring" cx="{x:.1f}" cy="{y:.1f}" r="18"/>'
+                     f'<circle class="map__dot" cx="{x:.1f}" cy="{y:.1f}" r="7"/>'
+                     f'<text class="map__name" x="{x + dx:.1f}" y="{y + dy:.1f}" text-anchor="{anchor}">{name}</text></g>')
+    parts.append("</svg>")
+    return "".join(parts)
 
 
-def drawing(key, cls="", mode="enter", fill=False, label=""):
-    """Inline SVG for one of the doctor's line drawings."""
-    d = DRAWINGS[key]
-    aria = f'role="img" aria-label="{label}"' if label else 'aria-hidden="true"'
-    if fill:
-        body = f'<path d="{" ".join(d["paths"])}" fill="currentColor" fill-rule="evenodd"/>'
-    else:
-        body = "".join(f'<path d="{p}"/>' for p in d["paths"])
-    return (
-        f'<svg class="ln {cls}" viewBox="0 0 {d["w"]} {d["h"]}" data-draw="{mode}" '
-        f'preserveAspectRatio="xMidYMid meet" {aria}><g>{body}</g></svg>'
-    )
+env.globals["map_svg"] = lambda: Markup(map_svg())
 
-
-env.globals["drawing"] = lambda *a, **k: Markup(drawing(*a, **k))
-
-
-def doctor_svg():
-    """Dr. Colombo's line portrait, aligned over Portrait A (1483×1920).
-    Alignment (glasses on glasses) measured on the original files."""
-    d = DRAWINGS["doctor"]
-    body = "".join(f'<path d="{p}"/>' for p in d["paths"])
-    return (
-        '<svg class="ln doc__lines" viewBox="0 0 1483 1920" data-draw="scene" aria-hidden="true">'
-        f'<g transform="translate(199 0) scale(0.744)">{body}</g></svg>'
-    )
-
-
-env.globals["doctor_svg"] = lambda *a, **k: Markup(doctor_svg(*a, **k))
-
-
-# ------------------------------------------------- generated illustrations
-def anatomy_svg():
-    """Cross-section of the facial soft tissues: skin, fat, SMAS, deep layer.
-    Layers named after Dr. Colombo's own facelift article."""
-    rnd = random.Random(7)
-    W = 1000
-
-    def wave(y, amp, n, phase=0.0, x0=0, x1=W, steps=60):
-        pts = []
-        for i in range(steps + 1):
-            x = x0 + (x1 - x0) * i / steps
-            yy = y + amp * math.sin(phase + n * math.pi * 2 * i / steps)
-            pts.append((x, yy))
-        d = f"M{pts[0][0]:.1f} {pts[0][1]:.1f}"
-        for x, yy in pts[1:]:
-            d += f" L{x:.1f} {yy:.1f}"
-        return d
-
-    skin = [wave(100, 5, 3, 0.4), wave(122, 4, 3, 0.9)]
-    fat = []
-    y = 160
-    row = 0
-    while y < 268:
-        x = 18 + (row % 2) * 20
-        while x < W - 10:
-            r = rnd.uniform(12, 19)
-            cx, cy = x + rnd.uniform(-3, 3), y + rnd.uniform(-3, 3)
-            fat.append(f"M{cx - r:.1f} {cy:.1f} a{r:.1f} {r * 0.82:.1f} 0 1 0 {2 * r:.1f} 0 a{r:.1f} {r * 0.82:.1f} 0 1 0 {-2 * r:.1f} 0")
-            x += 2 * r + rnd.uniform(4, 9)
-        y += 36
-        row += 1
-    smas = [wave(300, 3, 2, 0.2), wave(334, 3, 2, 0.5)]
-    for i in range(46):
-        x = 12 + i * 21.5
-        smas.append(f"M{x:.1f} {306:.1f} L{x + 14:.1f} {328:.1f}")
-    deep = [wave(392, 10, 2.5, 1.2)]
-    for i in range(7):
-        x = 70 + i * 135
-        yb = 392 + 10 * math.sin(1.2 + 2.5 * math.pi * 2 * x / W)
-        deep.append(f"M{x:.1f} {yb:.1f} q 18 22 46 30")
-    deep += [wave(446, 6, 1.5, 0.3), wave(460, 6, 1.5, 0.3)]
-    for k in range(5):
-        deep.append(wave(500 + k * 12, 3, 1, k * 0.6))
-
-    def g(cls, paths):
-        return f'<g class="{cls}">' + "".join(f'<path d="{p}"/>' for p in paths) + "</g>"
-
-    return (
-        f'<svg class="anat" viewBox="0 0 {W} 570" aria-hidden="true">'
-        + g("layer layer-skin", skin)
-        + g("layer layer-fat", fat)
-        + g("layer layer-smas", smas)
-        + g("layer layer-deep", deep)
-        + "</svg>"
-    )
-
-
-def lake_svg():
-    """Line illustration of Lake Lugano: mountains, horizon, reflections, lights."""
-    rnd = random.Random(3)
-    mountains = (
-        "M0 352 C 120 340 220 312 300 262 C 352 228 382 168 418 150 C 446 160 470 214 508 252 "
-        "C 566 304 668 330 782 338 C 902 344 1004 318 1104 290 C 1204 260 1296 236 1396 246 "
-        "C 1478 254 1548 276 1600 292"
-    )
-    ridge = "M560 330 C 640 300 720 296 800 312 M1150 300 C 1220 270 1300 262 1380 270"
-    horizon = "M0 380 L1600 380"
-    refl = []
-    for _ in range(70):
-        y = rnd.uniform(400, 590)
-        w = rnd.uniform(18, 140) * (1 - (y - 400) / 380)
-        x = rnd.uniform(0, 1600 - w)
-        refl.append(f'<path class="refl" d="M{x:.0f} {y:.0f} h{w:.0f}" style="opacity:{rnd.uniform(.25, .8):.2f}"/>')
-    lights = []
-    for _ in range(46):
-        x = rnd.choice([rnd.uniform(860, 1180), rnd.uniform(1240, 1520), rnd.uniform(120, 300)])
-        y = 376 - rnd.uniform(0, 26) * (1 if x > 800 else 0.5)
-        lights.append(f'<circle class="light" cx="{x:.0f}" cy="{y:.0f}" r="{rnd.uniform(1.4, 2.6):.1f}"/>')
-    return (
-        '<svg class="lake" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
-        '<defs><clipPath id="skyclip"><rect x="0" y="0" width="1600" height="379"/></clipPath></defs>'
-        '<circle class="sun" cx="1180" cy="170" r="30" clip-path="url(#skyclip)"/>'
-        f'<path class="mount" d="{mountains}"/><path class="mount ridge" d="{ridge}"/>'
-        f'<path class="horizon" d="{horizon}"/>' + "".join(refl) + "".join(lights) + "</svg>"
-    )
-
-
-env.globals["anatomy_svg"] = lambda *a, **k: Markup(anatomy_svg(*a, **k))
-env.globals["lake_svg"] = lambda *a, **k: Markup(lake_svg(*a, **k))
 
 # ---------------------------------------------------------------- languages
 import content_de
@@ -266,9 +187,16 @@ def lang_data(lang, base_journal):
         ly = g(M, "COURSES")[yi]
         courses.append({"year": y["year"], "place": ly["place"],
                         "items": [dict(it, **ly["items"][ii]) for ii, it in enumerate(y["items"])]})
+    filmstrip = []
+    for f in C.FILMSTRIP:
+        item = dict(f, city_name=C.CITIES[f["city"]]["name"])
+        if f["course"]:
+            yi, ii = f["course"]
+            item.update(courses[yi]["items"][ii])
+        filmstrip.append(item)
     vids = g(M, "VIDEOS")
     nav = [{"label": g(M, "NAV_LABELS")[k], "href": P[k]} for k in ["philosophy", "face", "breast", "academy", "contact"]]
-    return dict(M=M, P=P, procs=procs, areas=areas, journal=journal, courses=courses, vids=vids, nav=nav)
+    return dict(M=M, P=P, procs=procs, areas=areas, journal=journal, courses=courses, vids=vids, nav=nav, filmstrip=filmstrip)
 
 
 SITE_URL = os.environ.get("SITE_URL", C.SITE["url"]).rstrip("/")
@@ -350,10 +278,10 @@ def main():
     if DIST.exists():
         shutil.rmtree(DIST)
     shutil.copytree(ROOT / "assets", DIST / "assets")
-    sym = DRAWINGS["symbol"]
     (DIST / "assets" / "img" / "favicon.svg").write_text(
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {sym["w"]} {sym["h"]}">'
-        f'<path fill="#1B1A18" fill-rule="evenodd" d="{" ".join(sym["paths"])}"/></svg>'
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#5C1A2B"/>'
+        '<path d="M12 14v36M52 14v36" stroke="#C9A56B" stroke-width="2.5"/>'
+        '<text x="32" y="42" text-anchor="middle" font-family="Didot,Bodoni 72,Georgia,serif" font-style="italic" font-size="26" fill="#F3EDE5">GC</text></svg>'
     )
     base_journal = load_journal()
     D = {lang: lang_data(lang, base_journal) for lang in LANGS}
@@ -381,7 +309,9 @@ def main():
         ui = g(M, "UI")
         site = g(M, "SITE")
         html = env.get_template(tpl).render(
-            lang=lang, t=ui, h=g(M, "HOME"), P=d["P"], nav=d["nav"], site=site, quotes=g(M, "QUOTES"),
+            lang=lang, t=ui, h=g(M, "HOME"), S=g(M, "STORY"), P=d["P"], nav=d["nav"], site=site, quotes=g(M, "QUOTES"),
+            third_lines=C.THIRD_LINES, thirds=C.THIRDS, proc_third=C.PROC_THIRD, coords=C.COORDS,
+            procs_all=d["procs"], filmstrip=d["filmstrip"],
             alts=alts, current=ctx.pop("current", alts[lang]), year=date.today().year,
             js_i18n=json.dumps(ui["js"], ensure_ascii=False), **ctx)
         write(alts[lang], html)
@@ -395,6 +325,7 @@ def main():
         site = g(M, "SITE")
 
         render(lang, "home.html", "home", procs=d["procs"], atlas=g(M, "ATLAS"), locations=site["locations"],
+               rec=g(M, "RECONSTRUCTIVE"), pubs=C.PUBLICATIONS, breast_order=C.BREAST_ORDER, area_face=d["areas"]["face"],
                title=ui["home_title"], meta=ui["home_meta"], body_class="page-home")
 
         for key, area in d["areas"].items():
@@ -443,7 +374,8 @@ def main():
     M = d["M"]
     ui = g(M, "UI")
     html = env.get_template("404.html").render(
-        lang="it", t=ui, h=g(M, "HOME"), P=d["P"], nav=d["nav"], site=g(M, "SITE"), quotes=g(M, "QUOTES"),
+        lang="it", t=ui, h=g(M, "HOME"), S=g(M, "STORY"), P=d["P"], nav=d["nav"], site=g(M, "SITE"), quotes=g(M, "QUOTES"),
+        third_lines=C.THIRD_LINES, thirds=C.THIRDS, proc_third=C.PROC_THIRD, coords=C.COORDS, procs_all=d["procs"], filmstrip=d["filmstrip"],
         alts={l: D[l]["P"]["home"] for l in LANGS}, current="", year=date.today().year,
         js_i18n=json.dumps(ui["js"], ensure_ascii=False), title=f"{ui['nf_title']} — {ui['suffix']}", meta="",
         body_class="page-404")

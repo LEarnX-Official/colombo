@@ -695,3 +695,68 @@ HOME = {
     "convo_h_pre": "Begin with a", "convo_word": "conversation",
     "convo_lead": "Tell us what you would like to discuss. The secretary's office answers {hours}.",
 }
+
+# ==========================================================================
+# v2 "Atlas of Measure" — shared data
+# ==========================================================================
+# Facial thirds as Dr. Colombo describes them (upper third: forehead, brows, periocular area;
+# lower third and neck: the facelift). Positions measured on Portrait A (1483 × 1920).
+THIRD_LINES = [21.1, 29.3, 36.6, 44.5]          # % of image height: hairline, brow, nose base, chin
+THIRDS = {
+    "upper": ["blepharoplasty", "brow-lift", "botulinum-toxin"],
+    "middle": ["hyaluronic-acid", "biorevitalisation", "otoplasty"],
+    "lower": ["facelift", "lip-lift", "chin"],
+}
+PROC_THIRD = {p: t for t, ps in THIRDS.items() for p in ps}
+BREAST_ORDER = ["mastopexy", "augmentation", "reduction", "gynecomastia"]
+
+CITIES = {
+    "madrid": {"name": "Madrid", "lat": 40.42, "lon": -3.70},
+    "nice": {"name": "Nice", "lat": 43.70, "lon": 7.27},
+    "savona": {"name": "Savona", "lat": 44.31, "lon": 8.48},
+    "genoa": {"name": "Genova", "lat": 44.41, "lon": 8.93},
+    "cremona": {"name": "Cremona", "lat": 45.13, "lon": 10.02},
+    "lugano": {"name": "Lugano", "lat": 46.00, "lon": 8.95},
+    "zurich": {"name": "Zürich", "lat": 47.37, "lon": 8.54},
+}
+ROUTE = ["madrid", "nice", "savona", "nice", "cremona", "lugano"]
+COORDS = {"lugano": (46.0037, 8.9511), "zurich": (47.3769, 8.5417)}
+
+# Course film strip (chronological). city = key in CITIES; poster = image in assets/img
+FILMSTRIP = [
+    {"year": "2010–12", "city": "madrid", "poster": "", "course": None},
+    {"year": "2013", "city": "savona", "poster": "poster-2013-biennale", "course": (4, 0)},
+    {"year": "2015", "city": "nice", "poster": "poster-2015-face", "course": (3, 0)},
+    {"year": "2015", "city": "nice", "poster": "poster-2015-breast", "course": (3, 1)},
+    {"year": "2015", "city": "nice", "poster": "poster-2015-abdomen", "course": (3, 2)},
+    {"year": "2015", "city": "nice", "poster": "poster-2015-sutures", "course": (3, 3)},
+    {"year": "2017", "city": "nice", "poster": "poster-2017-aesthetic", "course": (2, 0)},
+    {"year": "2018", "city": "nice", "poster": "poster-2018-face", "course": (1, 0)},
+    {"year": "2018", "city": "nice", "poster": "poster-2018-rhino", "course": (1, 1)},
+    {"year": "2018", "city": "nice", "poster": "poster-2018-breast", "course": (1, 2)},
+    {"year": "2024", "city": "cremona", "poster": "poster-2024-face", "course": (0, 0)},
+    {"year": "2024", "city": "cremona", "poster": "poster-2024-nose", "course": (0, 1)},
+    {"year": "2024", "city": "cremona", "poster": "poster-2024-aesthetic", "course": (0, 2)},
+]
+
+STORY = {
+    "loader": "Calibrating",
+    "plates": ["Measure", "Face", "Breast", "Restore", "Atlas", "Teaching", "Discretion", "Lugano"],
+    "fig1": "FIG. 1 — Dr. Giuseppe Colombo, Lugano",
+    "thirds_labels": {"upper": "Upper third", "middle": "Middle third", "lower": "Lower third"},
+    "thirds_desc": {"upper": "Forehead, brows, eyes", "middle": "Cheeks, nose, ears", "lower": "Lips, chin, jaw and neck"},
+    "first_measure_html": "First, <em>measure</em>.<br>Then, restraint.",
+    "face_h_html": "The face, <em>by thirds.</em>",
+    "face_note": "Following Dr. Colombo's own description of the face in thirds.",
+    "breast_h_html": "The breast, <em>with measure.</em>",
+    "breast_figs": {"mastopexy": ("↑", "Reposition and reshape"), "augmentation": ("+", "Volume — never for fashion"),
+                    "reduction": ("4–5", "sizes smaller"), "gynecomastia": ("20–40", "the typical age")},
+    "restore_h_html": "Restoring <em>form</em> and function.",
+    "atlas_h_html": "The atlas, <em>and the papers.</em>",
+    "photos": "original photographs", "part1": "Part I — Theory", "part2": "Part II — Practice",
+    "pubs_n": "publications", "years": "years of research", "reviewer": "journals as reviewer",
+    "teach_h_html": "Teaching, <em>city by city.</em>",
+    "early": "Dissection courses directed in Nice and Madrid",
+    "today": "Today",
+    "lugano_coords": "Clinica Sant'Anna",
+}

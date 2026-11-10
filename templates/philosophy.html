@@ -1,42 +1,39 @@
 {% extends "base.html" %}
-{% from "_macros.html" import cta, crumbs, video %}
+{% from "_macros.html" import cta, crumbs, video, plate, portrait %}
 {% block main %}
-<section class="ahero" data-theme="dark">
-  <div class="wrap ahero__grid">
-    <figure class="ahero__photo" data-reveal>
-      <img src="/assets/img/portrait-a-800.webp" srcset="/assets/img/portrait-a-800.webp 800w, /assets/img/portrait-a-1400.webp 1400w"
-           sizes="(min-width: 900px) 40vw, 90vw" width="1483" height="1920" alt="{{ t.portrait_alt }}">
-    </figure>
-    <div class="ahero__text">
+<section class="phead phead--dark" data-theme="dark">
+  <div class="wrap phead__grid">
+    <div class="phead__text">
       {{ crumbs([(t.home, P.home), (nav[0].label, "")]) }}
-      <h1 class="ahero__h" data-lines>Giuseppe <em>Colombo</em></h1>
-      <p class="ahero__role" data-reveal>{{ site.role }}</p>
-      <p class="ahero__q" data-reveal lang="it">“{{ quotes.measure_it }} {{ quotes.limit_it }}”</p>
+      {{ plate('I', S.plates[0]) }}
+      <h1 class="d1" data-lines>Giuseppe<br><em>Colombo</em></h1>
+      <p class="phead__sub" data-reveal>{{ site.role }}</p>
+      <p class="lead" data-reveal lang="it"><em style="font-family:var(--display)">“{{ quotes.measure_it }} {{ quotes.limit_it }}”</em></p>
       {% if quotes.measure_en %}<p class="muted" data-reveal>{{ quotes.measure_en }} {{ quotes.limit_en }}</p>{% endif %}
     </div>
+    <div class="phead__aside" data-slit>{{ portrait(t, S, third_lines, eager=True, caption=S.fig1) }}</div>
   </div>
 </section>
 
-<section class="prose-sec prose-sec--about">
+<section class="prose-sec prose-sec--top">
   <div class="wrap prose-sec__grid">
-    <p class="label prose-sec__label" data-reveal>{{ t.in_his_words }}</p>
+    <p class="label" data-reveal>{{ t.in_his_words }}</p>
     <div class="prose prose--large">
       {% for para in about %}<p data-reveal>{{ para }}</p>{% endfor %}
       <p class="prose__sign" data-reveal>{{ t.thanks_trust }}</p>
-      <div class="prose__logo" data-reveal>{{ drawing('logo-script', 'about__script', mode='none', fill=True, label='Dr. Colombo') }}</div>
     </div>
   </div>
 </section>
 
-<section class="timeline" aria-labelledby="tl-title">
+<section class="rtl" aria-labelledby="tl-title">
   <div class="wrap">
     <p class="label" data-reveal>{{ t.path }}</p>
-    <h2 id="tl-title" class="h1" data-lines>{{ t.path_h_html|safe }}</h2>
+    <h2 id="tl-title" class="d2" data-lines>{{ t.path_h_html|safe }}</h2>
   </div>
-  <div class="timeline__track" data-hscroll>
-    <ol class="timeline__list">
+  <div class="rtl__track" data-hscroll>
+    <ol class="rtl__list">
       {% for when, what, detail in milestones %}
-      <li class="tl"><span class="tl__when">{{ when }}</span><h3 class="tl__h">{{ what }}</h3><p class="tl__p">{{ detail }}</p></li>
+      <li class="rtl__item"><span class="rtl__when">{{ when }}</span><h3 class="rtl__h">{{ what }}</h3><p class="rtl__p">{{ detail }}</p></li>
       {% endfor %}
     </ol>
   </div>
@@ -44,36 +41,34 @@
 
 <section class="person">
   <div class="wrap person__grid">
-    <div class="person__text">
+    <div>
       <p class="label" data-reveal>{{ t.the_person }}</p>
-      <h2 class="h2" data-lines>{{ t.person_h_html|safe }}</h2>
+      <h2 class="d2" data-lines>{{ t.person_h_html|safe }}</h2>
       <p class="lead" data-reveal>{{ t.person_p }}</p>
       <a class="arrowlink" href="{{ P.academy }}" data-reveal>{{ t.the_academy }} <span aria-hidden="true">→</span></a>
     </div>
-    <figure class="person__photo" data-reveal>
-      <img src="/assets/img/portrait-b-900.webp" width="900" height="1165" alt="{{ t.smile_alt }}" loading="lazy">
-    </figure>
+    <figure class="person__photo" data-slit><img src="/assets/img/portrait-b-900.webp" width="900" height="1165" alt="{{ t.smile_alt }}" loading="lazy"></figure>
   </div>
 </section>
 
-<section class="still still--inline" aria-label="{{ t.discretion }}">
-  <div class="wrap still__inner">
-    <p class="label">{{ t.discretion }}</p>
+<section class="still" data-theme="dark" aria-label="{{ t.discretion }}">
+  <div class="wrap">
+    {{ plate('VII', S.plates[6]) }}
     <blockquote class="still__q">
-      <p class="still__it" lang="it" data-reveal>“{{ quotes.discretion_it }}”</p>
-      {% if quotes.discretion_en %}<p class="still__en" data-reveal>{{ quotes.discretion_en }}</p>{% endif %}
+      <p lang="it" data-reveal>“{{ quotes.discretion_it }}”</p>
+      {% if quotes.discretion_en %}<p class="still__tr" data-reveal>{{ quotes.discretion_en }}</p>{% endif %}
     </blockquote>
   </div>
 </section>
 
-<section class="cv" aria-labelledby="cv-title">
+<section class="index" aria-labelledby="cv-title">
   <div class="wrap">
     <p class="label" data-reveal>{{ t.cv }}</p>
-    <h2 id="cv-title" class="h2" data-lines>{{ t.cv_h }}</h2>
+    <h2 id="cv-title" class="d2" data-lines>{{ t.cv_h }}</h2>
     <div class="acc">
       {% for group, items in cv %}
       <details class="acc__item" data-reveal{% if loop.first %} open{% endif %}>
-        <summary><span>{{ group }}</span><i aria-hidden="true"></i></summary>
+        <summary><span class="acc__n">TAV. {{ loop.index }}</span><span class="acc__t">{{ group }}</span><i aria-hidden="true"></i></summary>
         <ul class="acc__list">{% for it in items %}<li>{{ it }}</li>{% endfor %}</ul>
       </details>
       {% endfor %}
@@ -81,12 +76,10 @@
   </div>
 </section>
 
-<section class="more">
+<section class="media">
   <div class="wrap">
     <p class="label" data-reveal>{{ t.video_it }}</p>
-    <div class="more__grid">
-      {% for id, vt in videos %}<div data-reveal>{{ video(id, vt, t) }}</div>{% endfor %}
-    </div>
+    <div class="media__grid">{% for id, vt in videos %}<div data-reveal>{{ video(id, vt, t) }}</div>{% endfor %}</div>
   </div>
 </section>
 
