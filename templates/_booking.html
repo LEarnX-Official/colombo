@@ -1,0 +1,56 @@
+<div class="bk" id="booking" role="dialog" aria-modal="true" aria-labelledby="bk-title" aria-hidden="true" data-booking>
+  <div class="bk__scrim" data-book-close></div>
+  <div class="bk__panel">
+    <div class="bk__top">
+      <p class="label">{{ t.bk_label }}</p>
+      <button class="bk__close" type="button" data-book-close>{{ t.close }}</button>
+    </div>
+    <div class="bk__progress" aria-hidden="true"><span data-bk-progress></span></div>
+    <form class="bk__form" data-bk-form novalidate>
+      <fieldset class="bk__step is-active" data-step="1">
+        <legend id="bk-title" class="bk__q">{{ t.bk_q1 }}</legend>
+        <div class="bk__choices">
+          {% for opt in t.bk_opts %}
+          <label class="choice"><input type="radio" name="interest" value="{{ opt }}"><span>{{ opt }}</span></label>
+          {% endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="bk__step" data-step="2">
+        <legend class="bk__q">{{ t.bk_q2 }}</legend>
+        <div class="bk__choices">
+          {% for loc in site.locations %}
+          <label class="choice"><input type="radio" name="location" value="{{ loc.key }}" data-label="{{ loc.city }}{% if loc.country %}, {{ loc.country }}{% endif %}"><span>{{ loc.city }}{% if loc.country %}, {{ loc.country }}{% endif %} <small>{{ loc.role }}</small></span></label>
+          {% endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="bk__step" data-step="3">
+        <legend class="bk__q">{{ t.bk_q3 }}</legend>
+        <label class="field"><span>{{ t.bk_name }}</span><input name="name" autocomplete="name" required></label>
+        <label class="field"><span>{{ t.bk_email }}</span><input name="email" type="email" autocomplete="email" required></label>
+        <label class="field"><span>{{ t.bk_phone }}</span><input name="phone" type="tel" autocomplete="tel" placeholder="+41 …"></label>
+        <label class="field"><span>{{ t.bk_lang }}</span>
+          <select name="language">
+            {% for code, name in [('it', 'Italiano'), ('de', 'Deutsch'), ('en', 'English'), ('fr', 'Français')] %}<option{% if code == lang %} selected{% endif %}>{{ name }}</option>{% endfor %}
+          </select>
+        </label>
+      </fieldset>
+      <fieldset class="bk__step" data-step="4">
+        <legend class="bk__q">{{ t.bk_q4 }}</legend>
+        <label class="field"><span>{{ t.bk_msg }}</span><textarea name="message" rows="5"></textarea></label>
+        <label class="check"><input type="checkbox" name="privacy" required><span>{{ t.bk_consent }}</span></label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </fieldset>
+      <div class="bk__step bk__done" data-step="5">
+        <p class="bk__q">{{ t.bk_thanks }}</p>
+        <p>{{ t.bk_done.replace('{email}', '<a href="mailto:' ~ site.email ~ '">' ~ site.email ~ '</a>').replace('{hours}', site.hours)|safe }}</p>
+        <p class="muted">{{ t.bk_conf }}</p>
+      </div>
+      <p class="bk__error" role="alert" data-bk-error></p>
+      <div class="bk__nav">
+        <button type="button" class="btn btn--text" data-bk-back>{{ t.bk_back }}</button>
+        <button type="button" class="btn btn--line" data-bk-next>{{ t.bk_continue }}</button>
+      </div>
+    </form>
+    <p class="bk__alt">{{ t.bk_or_call }} <a href="tel:{{ site.phones[0].tel }}">{{ site.phones[0].display }}</a> · <a href="tel:{{ site.phones[1].tel }}">{{ site.phones[1].display }}</a></p>
+  </div>
+</div>

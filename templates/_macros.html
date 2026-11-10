@@ -1,0 +1,26 @@
+{% macro video(id, title, t) %}
+<button type="button" class="vid" data-yt="{{ id }}" aria-label="{{ t.play }}: {{ title }}">
+  <img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+  <span class="vid__play" aria-hidden="true"></span>
+  <span class="vid__t">{{ title }}</span>
+</button>
+{% endmacro %}
+
+{% macro cta(t, text, sub="") %}
+<section class="cta">
+  <div class="wrap cta__inner">
+    <p class="label" data-reveal>{{ t.first_step }}</p>
+    <h2 class="h1" data-lines>{{ text|safe }}</h2>
+    {% if sub %}<p class="lead" data-reveal>{{ sub }}</p>{% endif %}
+    <button class="btn btn--line" type="button" data-book data-reveal>{{ t.book }}</button>
+  </div>
+</section>
+{% endmacro %}
+
+{% macro crumbs(items) %}
+<nav class="crumbs" aria-label="Breadcrumb">
+  {% for label, href in items %}
+    {% if href %}<a href="{{ href }}">{{ label }}</a><span aria-hidden="true">/</span>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}
+  {% endfor %}
+</nav>
+{% endmacro %}

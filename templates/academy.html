@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% from "_macros.html" import crumbs, video %}
+{% block main %}
+<section class="phero">
+  <div class="wrap phero__grid">
+    <div class="phero__text">
+      {{ crumbs([(t.home, P.home), (t.academy, "")]) }}
+      <h1 class="phero__h" data-lines>{{ t.academy }}</h1>
+      <p class="lead" data-reveal>{{ t.academy_quote }}</p>
+      <nav class="jump" aria-label="{{ t.on_page }}" data-reveal>
+        <a href="#atlas">{{ t.j_atlas }}</a><a href="#fellowship">{{ t.j_fellow }}</a><a href="#courses">{{ t.j_courses }}</a><a href="#publications">{{ t.j_pubs }}</a><a href="#journal">{{ t.j_journal }}</a><a href="#videos">{{ t.j_videos }}</a>
+      </nav>
+    </div>
+    <div class="phero__art">{{ drawing('eye-brow', 'phero__ln', mode='load') }}</div>
+  </div>
+</section>
+
+<section class="atlas atlas--page" id="atlas">
+  <div class="wrap atlas__grid">
+    <div class="atlas__book" data-tilt>
+      <div class="book"><img src="/assets/img/atlas-springer-800.webp" width="800" height="1060" alt="{{ atlas.title }} (Springer)" loading="lazy"><span class="book__edge" aria-hidden="true"></span></div>
+    </div>
+    <div class="atlas__text">
+      <p class="label" data-reveal>{{ t.atlas_label }} · {{ atlas.role }}</p>
+      <h2 class="h1" data-lines><em>{{ atlas.title }}</em></h2>
+      {% for para in atlas.text %}<p data-reveal>{{ para }}</p>{% endfor %}
+      <p data-reveal><a class="btn btn--line" href="{{ atlas.url }}" target="_blank" rel="noopener">{{ t.view_springer }}</a></p>
+      <div class="atlas__prev" data-reveal>
+        <img src="/assets/img/atlas-iconografico-600.webp" width="600" height="803" alt="{{ atlas.previous.title }}" loading="lazy">
+        <div><p class="label">{{ t.earlier_work }}</p><p lang="it"><em>{{ atlas.previous.title }}</em></p><p class="muted">{{ atlas.previous.note }}</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fellow" id="fellowship" data-theme="dark">
+  <div class="wrap fellow__grid">
+    <div>
+      <p class="label" data-reveal>{{ t.fellow_label }}</p>
+      <h2 class="h1" data-lines>{{ t.fellow_h_html|safe }}</h2>
+    </div>
+    <div class="fellow__text">
+      {% for para in fellowship %}<p data-reveal>{{ para }}</p>{% endfor %}
+      <p data-reveal>{{ t.information }} <a href="mailto:{{ site.email_training }}">{{ site.email_training }}</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="courses" id="courses">
+  <div class="wrap">
+    <p class="label" data-reveal>{{ t.courses_label }}</p>
+    <h2 class="h1" data-lines>{{ t.courses_h_html|safe }}</h2>
+    <p class="lead" data-reveal>{{ t.courses_lead }} <a href="mailto:{{ site.email_training }}">{{ site.email_training }}</a>.</p>
+    {% for y in courses %}
+    <div class="cyear">
+      <div class="cyear__head" data-reveal><span class="cyear__y">{{ y.year }}</span><span class="muted">{{ y.place }}</span></div>
+      <div class="cyear__grid">
+        {% for c in y["items"] %}
+        <article class="ccard" data-reveal>
+          <div class="ccard__img"><img src="/assets/img/{{ c.poster }}-640.webp" alt="{{ t.poster }}: {{ c.title }}" loading="lazy"></div>
+          <p class="ccard__date">{{ c.date }}</p>
+          <h3 class="ccard__h">{{ c.title }}</h3>
+          {% if c.pdf %}<a class="arrowlink" href="{{ c.pdf }}" target="_blank" rel="noopener">{{ t.brochure }} <span aria-hidden="true">↗</span></a>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    <details class="acc__item acc__item--solo" data-reveal>
+      <summary><span>{{ t.earlier_courses }}</span><i aria-hidden="true"></i></summary>
+      <ul class="acc__list">{% for c in courses_early %}<li>{{ c }}</li>{% endfor %}</ul>
+    </details>
+  </div>
+</section>
+
+<section class="pubs" id="publications">
+  <div class="wrap">
+    <p class="label" data-reveal>{{ t.pubs_label }}</p>
+    <h2 class="h1" data-lines>{{ t.pubs_h_html|safe }}</h2>
+    <div class="pubs__filters" role="group" aria-label="{{ t.filter_topic }}" data-reveal>
+      <button type="button" class="chip is-active" data-filter="all">{{ t.all }}</button>
+      {% for tp in ['Face', 'Breast', 'Aesthetic medicine', 'Oncology', 'General', 'Research'] %}<button type="button" class="chip" data-filter="{{ tp }}">{{ t.topics[tp] }}</button>{% endfor %}
+    </div>
+    <ol class="pubs__list">
+      {% for y, title, j, topic in pubs %}
+      <li class="pub" data-topic="{{ topic }}" lang="en"><span class="pub__y">{{ y or '—' }}</span><span class="pub__t">{{ title }}</span><span class="pub__j muted">{{ j }}</span></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="jteaser" id="journal">
+  <div class="wrap">
+    <div class="jteaser__head">
+      <div><p class="label" data-reveal>{{ t.journal_label }}</p><h2 class="h1" data-lines>{{ t.journal_h_html|safe }}</h2></div>
+      <a class="arrowlink" href="{{ P.journal }}" data-reveal>{{ t.all_articles }} <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="jgrid">
+      {% for a in journal %}
+      <a class="jcard" href="{{ a.href }}" data-reveal>
+        <span class="label">{{ t.cats[a.category] }} · {{ a.minutes }} {{ t.min }}</span>
+        <h3 class="jcard__h">{{ a.title }}</h3>
+        {% if lang != 'it' %}<p class="jcard__it" lang="it">{{ a.it_title }}</p>{% endif %}
+        <span class="muted">{{ a.date_fmt }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="more" id="videos">
+  <div class="wrap">
+    <p class="label" data-reveal>{{ t.videos_it }}</p>
+    <div class="vgrid">
+      {% for id, vt in videos %}<div data-reveal>{{ video(id, vt, t) }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

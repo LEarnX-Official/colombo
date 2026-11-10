@@ -1,0 +1,11 @@
+// Only used if you deploy with Cloudflare Workers (Workers Builds).
+// Cloudflare Pages ignores this file and uses the build settings in its dashboard.
+{
+  "name": "drgiuseppecolombo",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
