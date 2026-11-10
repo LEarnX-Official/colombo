@@ -431,25 +431,3 @@ HOME = {
     "convo_h_pre": "Inizia con una", "convo_word": "conversazione",
     "convo_lead": "Raccontaci di che cosa vorresti parlare. La segreteria risponde {hours}.",
 }
-
-STORY = {
-    "loader": "Calibrazione",
-    "plates": ["Misura", "Viso", "Seno", "Ricostruire", "Atlante", "Insegnare", "Discrezione", "Lugano"],
-    "fig1": "FIG. 1 — Dr. Giuseppe Colombo, Lugano",
-    "thirds_labels": {"upper": "Terzo superiore", "middle": "Terzo medio", "lower": "Terzo inferiore"},
-    "thirds_desc": {"upper": "Fronte, sopracciglia, occhi", "middle": "Zigomi, naso, orecchie", "lower": "Labbra, mento, mandibola e collo"},
-    "first_measure_html": "Prima, la <em>misura</em>.<br>Poi, il limite.",
-    "face_h_html": "Il viso, <em>per terzi.</em>",
-    "face_note": "Secondo la descrizione del volto per terzi nei testi del Dr. Colombo.",
-    "breast_h_html": "Il seno, <em>con misura.</em>",
-    "breast_figs": {"mastopexy": ("↑", "Riposizionare e rimodellare"), "augmentation": ("+", "Volume — mai per moda"),
-                    "reduction": ("4–5", "taglie in meno"), "gynecomastia": ("20–40", "l'età più frequente")},
-    "restore_h_html": "Ripristinare <em>forma</em> e funzione.",
-    "atlas_h_html": "L'Atlante, <em>e le pubblicazioni.</em>",
-    "photos": "fotografie originali", "part1": "Parte I — Teoria", "part2": "Parte II — Pratica",
-    "pubs_n": "pubblicazioni", "years": "anni di ricerca", "reviewer": "riviste come reviewer",
-    "teach_h_html": "Insegnare, <em>città per città.</em>",
-    "early": "Corsi di dissezione diretti a Nizza e Madrid",
-    "today": "Oggi",
-    "lugano_coords": "Clinica Sant'Anna",
-}

@@ -1,54 +1,46 @@
 {% extends "base.html" %}
-{% from "_macros.html" import cta, crumbs, plate, portrait, tape %}
+{% from "_macros.html" import cta, crumbs %}
 {% block main %}
-<section class="phead">
-  <div class="wrap">
-    {{ crumbs([(t.home, P.home), (area.title, "")]) }}
-    {{ plate('II' if area.slug == 'face' else 'III', S.plates[1] if area.slug == 'face' else S.plates[2]) }}
-    <h1 class="d1" data-lines>{{ S.face_h_html|safe if area.slug == 'face' else S.breast_h_html|safe }}</h1>
-    <p class="lead" data-reveal style="margin-top:28px">{{ area.lede }}</p>
-    <p class="phead__sub" data-reveal>“{{ area.intro }}” — {{ t.dr }}</p>
+<section class="phero">
+  <div class="wrap phero__grid">
+    <div class="phero__text">
+      {{ crumbs([(t.home, P.home), (area.title, "")]) }}
+      <h1 class="phero__h" data-lines>{{ area.title }}</h1>
+      <p class="lead" data-reveal>{{ area.lede }}</p>
+      <p class="phero__quote" data-reveal>“{{ area.intro }}” <span class="muted">— {{ t.dr }}</span></p>
+    </div>
+    <div class="phero__art">{{ drawing(area.drawing, 'phero__ln', mode='load') }}</div>
   </div>
 </section>
 
-{% if area.slug == 'face' %}
-<section class="p2" data-thirds-scope>
-  <div class="wrap p2__grid">
-    <div class="p2__sticky">{{ portrait(t, S, third_lines, active='upper', cls='p2__portrait', draw=True) }}</div>
-    <div class="p2__list">
-      <p class="p2__note" data-reveal>{{ S.face_note }}</p>
-      {% for key in ['upper', 'middle', 'lower'] %}
-      <div class="third" data-third="{{ key }}">
-        <p class="third__n">0{{ loop.index }} · {{ S.thirds_labels[key] }}</p>
-        <h2 class="third__h">{{ S.thirds_desc[key] }}</h2>
-        <ul class="third__procs">
-          {% for pk in thirds[key] %}{% set p = procs_all[pk] %}
-          <li><a href="{{ p.href }}"><span class="third__pt">{{ p.title }}</span><span class="third__ps">{{ p.lede }}</span><span class="third__a" aria-hidden="true">→</span></a></li>
-          {% endfor %}
-        </ul>
-      </div>
+{% for grp in groups %}
+<section class="plist">
+  <div class="wrap">
+    <p class="label" data-reveal>— {{ grp.title }}</p>
+    <div class="plist__grid">
+      {% for p in grp["items"] %}
+      <a class="pcard" href="{{ p.href }}" data-reveal>
+        <div class="pcard__art">{{ drawing(p.drawing, 'pcard__ln', mode='hover') }}</div>
+        <span class="pcard__n">{{ '%02d' % loop.index }}</span>
+        <h2 class="pcard__h">{{ p.title }}</h2>
+        <p class="pcard__sub">{{ p.subtitle }}</p>
+        <p class="pcard__p">{{ p.lede }}</p>
+        <span class="arrowlink">{{ t.discover }} <span aria-hidden="true">→</span></span>
+      </a>
       {% endfor %}
     </div>
   </div>
 </section>
+{% endfor %}
+
+{% if area.slug == 'face' %}
 <section class="band">
   <div class="wrap band__inner">
-    <div><p class="label" data-reveal>{{ t.recon_label }}</p><h2 class="d2" data-lines>{{ t.recon_band }}</h2></div>
+    <div>
+      <p class="label" data-reveal>{{ t.recon_label }}</p>
+      <h2 class="h2" data-lines>{{ t.recon_band }}</h2>
+    </div>
     <a class="arrowlink" href="{{ P.reconstructive }}" data-reveal>{{ t.discover }} <span aria-hidden="true">→</span></a>
-  </div>
-</section>
-{% else %}
-{{ tape() }}
-<section class="figs-sec">
-  <div class="wrap p3__figs">
-    {% for grp in groups %}{% for p in grp["items"] %}{% set f = S.breast_figs[p.key] %}
-    <a class="bfig" href="{{ p.href }}" data-reveal>
-      <span class="bfig__n">{{ f[0]|replace('–', '<i class="bdash">–</i>')|safe }}</span>
-      <span class="bfig__c">{{ f[1] }}</span>
-      <span class="bfig__t">{{ p.title }}</span>
-      <span class="bfig__s">{{ p.subtitle }} →</span>
-    </a>
-    {% endfor %}{% endfor %}
   </div>
 </section>
 {% endif %}

@@ -1,8 +1,5 @@
 # Dr. Giuseppe Colombo — website
 
-**Design v2 — “L'Atlante della Misura”** (Bordeaux & Bone, Bodoni Moda). Storyline and rationale: `docs/ANIMATION-STORYLINE-V2.md`.
-The homepage is told in eight plates (Tav. I–VIII) measured by a 0–100 mm ruler; no artwork from the old site is used — only its content, photographs, books, papers and course posters.
-
 A static, quietly luxurious rebuild of drgiuseppecolombo.com. It follows
 `../STORYLINE-AND-COMPONENT-DESIGN.md` and uses only the original site's own content.
 
@@ -56,15 +53,16 @@ After going live, point the domain in Cloudflare (Custom domains) and remove the
 | `content_it.py` | **Italian** (primary, served at `/`): the doctor's original texts. |
 | `content_de.py` | **German** (`/de/`): translated faithfully from the Italian. |
 | `content.py` | **English** (`/en/`) plus shared data (publications, posters, videos). Any key missing in IT/DE falls back to it. |
-| `build.py` | Static generator: pages in IT/DE/EN, the city map (real coordinates), sitemap, `_redirects`, `_headers`. |
+| `build.py` | Static generator: pages, inline SVG drawings, anatomy and lake illustrations, sitemap. |
 | `templates/` | Jinja templates: `home.html` (the 8 scenes), `procedure.html`, `area.html`, `philosophy.html`, `academy.html`, `journal.html`, `article.html`, `contact.html`, `reconstructive.html`, `404.html`. |
 | `assets/css/main.css` | Design system (tokens, typography, components, responsive, reduced motion). |
-| `assets/js/main.js` | Smooth scroll (Lenis), reveals, header, menu, booking panel, bordeaux page transitions, and the instruments: facial thirds, suture, tape, 3D book, film strip + map, counters. |
+| `assets/js/main.js` | Smooth scroll (Lenis), line drawing, reveals, header, menu, booking panel, page transitions, video and map facades, filters. |
 | `assets/js/home.js` | The homepage storyline: scroll-driven scenes 1–8. |
 | `assets/vendor/` | GSAP 3.13.0 + ScrollTrigger, Lenis 1.3.4 (self-hosted). |
-| `assets/fonts/` | Bodoni Moda (variable), Instrument Sans, IBM Plex Mono — self-hosted, OFL. |
+| `assets/fonts/` | Cormorant Garamond + Inter, self-hosted (no Google Fonts requests). |
 | `assets/img/` | Portraits, Atlas covers and course posters (WebP). |
-| `data/journal.json` | The 11 original journal articles (Italian). |
+| `data/drawings/` | Dr. Colombo's line drawings, traced to vector paths. |
+| `tools/` | The scripts that prepared and traced the drawings (`prep_drawings.py`, `trace.js` with `potrace`). |
 
 ## Where the content comes from
 

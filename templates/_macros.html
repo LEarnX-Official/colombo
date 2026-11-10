@@ -1,58 +1,18 @@
-{# ---------- Monogram: GC between two measuring ticks ---------- #}
-{% macro mono(cls="") %}<span class="mono {{ cls }}" aria-hidden="true"><i></i><b>GC</b><i></i></span>{% endmacro %}
-
-{# ---------- Plate label: TAV. II — Viso ---------- #}
-{% macro plate(num, name, cls="") %}<p class="plabel {{ cls }}"><span>TAV. {{ num }}</span><i></i>{{ name }}</p>{% endmacro %}
-
-{# ---------- Portrait plate with facial thirds ---------- #}
-{% macro portrait(t, S, lines, active="", cls="", caption="", eager=False, draw=False) %}
-<figure class="pplate {{ cls }}" data-active="{{ active }}"{% if draw %} data-draw-thirds{% endif %}>
-  <div class="pplate__img">
-    <img src="/assets/img/portrait-a-800.webp" srcset="/assets/img/portrait-a-800.webp 800w, /assets/img/portrait-a-1400.webp 1400w"
-         sizes="(min-width: 900px) 34vw, 86vw" width="1483" height="1920" alt="{{ t.portrait_alt }}"{% if not eager %} loading="lazy"{% endif %}>
-  </div>
-  <div class="thirds" aria-hidden="true">
-    {% for y in lines %}<span class="thirds__line" style="top:{{ y }}%"></span>{% endfor %}
-    {% for key in ['upper', 'middle', 'lower'] %}
-    <span class="thirds__band" data-third="{{ key }}" style="top:{{ lines[loop.index0] }}%;height:{{ (lines[loop.index] - lines[loop.index0])|round(1) }}%"></span>
-    <span class="thirds__lab" data-third="{{ key }}" style="top:{{ ((lines[loop.index0] + lines[loop.index]) / 2)|round(1) }}%">{{ S.thirds_labels[key] }}</span>
-    {% endfor %}
-    <span class="thirds__bracket" style="top:{{ lines[0] }}%;height:{{ (lines[3] - lines[0])|round(1) }}%"><em>1 : 1 : 1</em></span>
-  </div>
-  {% if caption %}<figcaption class="pplate__cap">{{ caption }}</figcaption>{% endif %}
-</figure>
-{% endmacro %}
-
-{# ---------- Tape measure ---------- #}
-{% macro tape(cls="") %}
-<div class="tape {{ cls }}" aria-hidden="true"><div class="tape__track" data-tape>{% for i in range(0, 401, 10) %}<span class="tape__n">{{ i }}</span>{% endfor %}</div></div>
-{% endmacro %}
-
-{# ---------- Suture line (stitches added by JS) ---------- #}
-{% macro suture(cls="") %}
-<svg class="suture {{ cls }}" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true" data-suture>
-  <path class="suture__cut" d="M10 110 C 260 30, 520 150, 760 80 S 1100 40, 1190 70"/>
-  <g class="suture__stitches"></g>
-</svg>
-{% endmacro %}
-
-{# ---------- Marking line (surgeon's dashed pen) ---------- #}
-{% macro mark(cls="") %}<svg class="mark {{ cls }}" viewBox="0 0 600 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 C 150 4, 320 18, 598 9"/></svg>{% endmacro %}
-
 {% macro video(id, title, t) %}
 <button type="button" class="vid" data-yt="{{ id }}" aria-label="{{ t.play }}: {{ title }}">
-  <span class="vid__frame"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid__play" aria-hidden="true"></span></span>
+  <img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+  <span class="vid__play" aria-hidden="true"></span>
   <span class="vid__t">{{ title }}</span>
 </button>
 {% endmacro %}
 
 {% macro cta(t, text, sub="") %}
-<section class="cta" data-theme="dark">
+<section class="cta">
   <div class="wrap cta__inner">
     <p class="label" data-reveal>{{ t.first_step }}</p>
-    <h2 class="d2" data-lines>{{ text|safe }}</h2>
+    <h2 class="h1" data-lines>{{ text|safe }}</h2>
     {% if sub %}<p class="lead" data-reveal>{{ sub }}</p>{% endif %}
-    <button class="btn btn--champ" type="button" data-book data-reveal>{{ t.book }}</button>
+    <button class="btn btn--line" type="button" data-book data-reveal>{{ t.book }}</button>
   </div>
 </section>
 {% endmacro %}

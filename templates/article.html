@@ -25,13 +25,14 @@
     {% if proc %}<a class="arrowlink" href="{{ proc.href }}">{{ t.related_proc }} {{ proc.title }} <span aria-hidden="true">→</span></a>{% endif %}
   </footer>
 </article>
-<section class="jteaser" style="padding-top:0">
+
+<section class="jteaser">
   <div class="wrap">
     <p class="label" data-reveal>{{ t.continue_reading }}</p>
     <div class="jgrid jgrid--two">
       {% for o in others %}
       <a class="jcard" href="{{ o.href }}" data-reveal>
-        <span class="jcard__fig">{{ t.cats[o.category] }} · {{ o.minutes }} {{ t.min }}</span>
+        <span class="label">{{ t.cats[o.category] }} · {{ o.minutes }} {{ t.min }}</span>
         <h2 class="jcard__h">{{ o.title }}</h2>
         {% if lang != 'it' %}<p class="jcard__it" lang="it">{{ o.it_title }}</p>{% endif %}
       </a>

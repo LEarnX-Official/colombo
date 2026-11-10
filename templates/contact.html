@@ -1,20 +1,20 @@
 {% extends "base.html" %}
-{% from "_macros.html" import crumbs, plate, mark %}
+{% from "_macros.html" import crumbs %}
 {% block main %}
-<section class="phead phead--short">
+<section class="phero phero--short">
   <div class="wrap">
     {{ crumbs([(t.home, P.home), (t.contact, "")]) }}
-    {{ plate('VIII', t.contact) }}
-    <h1 class="d1" data-lines>{{ t.contact_h_html|safe }}</h1>
-    <p class="lead" data-reveal style="margin-top:24px">{{ t.contact_lead.replace('{hours}', site.hours) }}</p>
-    <p data-reveal><button class="btn btn--solid" type="button" data-book>{{ t.request_consult }}</button></p>
+    <h1 class="phero__h" data-lines>{{ t.contact_h_html|safe }}</h1>
+    <p class="lead" data-reveal>{{ t.contact_lead.replace('{hours}', site.hours) }}</p>
+    <p data-reveal><button class="btn btn--line" type="button" data-book>{{ t.request_consult }}</button></p>
   </div>
 </section>
+
 <section class="clocs">
   <div class="wrap clocs__grid">
     {% for loc in locations %}
     <div class="lcard lcard--light" data-reveal>
-      <p class="lcard__k">0{{ loop.index }}{% if loc.key in coords %} · <span data-coord="{{ coords[loc.key][0] }}">{{ coords[loc.key][0] }}</span>° N · <span data-coord="{{ coords[loc.key][1] }}">{{ coords[loc.key][1] }}</span>° E{% endif %}</p>
+      <span class="label">— 0{{ loop.index }}</span>
       <h2 class="lcard__h">{{ loc.city }}{% if loc.country %} <span class="muted">· {{ loc.country }}</span>{% endif %}</h2>
       <p class="lcard__role">{{ loc.role }}</p>
       {% for l in loc.lines %}<p>{{ l }}</p>{% endfor %}
@@ -24,6 +24,7 @@
     {% endfor %}
   </div>
 </section>
+
 <section class="cdirect">
   <div class="wrap cdirect__grid">
     <div data-reveal>
@@ -33,21 +34,22 @@
     </div>
     <div data-reveal>
       <p class="label">{{ t.email }}</p>
-      <p class="cdirect__big cdirect__mail"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p class="cdirect__big"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
       <p class="muted">{{ t.info_appts }}</p>
       <p class="cdirect__mid"><a href="mailto:{{ site.email_training }}">{{ site.email_training }}</a></p>
       <p class="muted">{{ t.fellow_courses }}</p>
     </div>
   </div>
 </section>
-<section class="map-sec">
+
+<section class="map">
   <div class="wrap">
-    <div class="map__box" data-map="{{ site.map_query }}" data-theme="dark">
-      {{ map_svg() }}
+    <div class="map__box" data-map="{{ site.map_query }}">
+      {{ drawing('dash-arrow', 'map__ln', mode='enter') }}
       <div class="map__inner">
-        <p class="label">Clinica Sant'Anna · Lugano · 46.00° N 8.95° E</p>
+        <p class="label">— Clinica Sant'Anna · Lugano</p>
         <p>{{ t.map_text }}</p>
-        <button type="button" class="btn btn--champ" data-map-load>{{ t.show_map }}</button>
+        <button type="button" class="btn btn--line" data-map-load>{{ t.show_map }}</button>
       </div>
     </div>
   </div>
