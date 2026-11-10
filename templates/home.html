@@ -26,6 +26,7 @@
 {# ===== 2 · NATURALEZZA — soft focus becomes clarity ===== #}
 <section class="nat" aria-labelledby="nat-title">
   <div class="nat__pin">
+    <div class="nat__photo" aria-hidden="true"><img src="/assets/img/linen-1264.webp" srcset="/assets/img/linen-760.webp 760w, /assets/img/linen-1264.webp 1264w" sizes="100vw" width="1264" height="848" alt="" loading="lazy"></div>
     <div class="nat__light" aria-hidden="true"></div>
     <div class="wrap nat__inner">
       <p class="eyebrow nat__label">{{ L.nat_label }}</p>
@@ -82,6 +83,7 @@
       <p class="eyebrow" data-reveal>{{ L.journey_label }}</p>
       <h2 id="jr-title" class="h2" data-lines>{{ L.journey_h_html|safe }}</h2>
       <button class="btn btn--line" type="button" data-book data-reveal>{{ t.book }}</button>
+      {{ arch('/assets/img/loggia-760.webp', '', 760, 510, 'jr__arch') }}
     </div>
     <ol class="jr__steps" data-journey>
       <span class="jr__rail" aria-hidden="true"><i data-journey-line></i></span>
@@ -133,15 +135,20 @@
   </div>
 </section>
 
-{# ===== 7 · LUGANO — a window on the lake ===== #}
+{# ===== 7 · LUGANO — a day on the lake, seen through an arch ===== #}
 <section class="lg" aria-labelledby="lg-title">
   <div class="lg__pin">
     <div class="lg__window" data-lake-window>
-      {{ glow('lake', 'lg__glow') }}
+      <div class="lg__layer lg__mist"><img src="/assets/img/lake-mist-1264.webp" srcset="/assets/img/lake-mist-760.webp 760w, /assets/img/lake-mist-1264.webp 1264w" sizes="90vw" width="1264" height="848" alt="" loading="lazy"></div>
+      <div class="lg__layer lg__dusk"><img src="/assets/img/lake-dusk-1264.webp" srcset="/assets/img/lake-dusk-760.webp 760w, /assets/img/lake-dusk-1264.webp 1264w" sizes="90vw" width="1264" height="848" alt="" loading="lazy"></div>
+      <div class="lg__fog" aria-hidden="true"><i></i><i></i></div>
+      <div class="lg__glint" aria-hidden="true"></div>
+      <div class="lg__veil" aria-hidden="true"></div>
       <div class="lg__text">
         <p class="eyebrow">{{ L.place_label }}</p>
         <h2 id="lg-title" class="lg__h">Lugano</h2>
         <p class="lg__p">{{ h.lugano_p }}</p>
+        <p class="lg__time" aria-hidden="true"><span data-lg-time>07:00</span><i></i><span class="lg__tod"><span data-tod="am">{{ L.morning }}</span><span data-tod="pm">{{ L.evening }}</span></span></p>
       </div>
     </div>
   </div>

@@ -488,5 +488,6 @@ LUCE = {
     "place_label": "— Der Ort",
     "proc_journey": "— Ihr Weg",
     "facts_title": "Auf einen Blick",
+    "morning": "Morgen", "evening": "Abend",
     "concern_word": "Bereich",
 }

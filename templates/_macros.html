@@ -16,7 +16,7 @@
 {# ---------- Light arch (no image): a soft gradient window with a word ---------- #}
 {% macro lightarch(word, sub="", cls="") %}
 <div class="larch {{ cls }}" data-arch aria-hidden="true">
-  <div class="arch__in">{{ glow('warm') }}<span class="larch__word">{{ word }}</span>{% if sub %}<span class="larch__sub">{{ sub }}</span>{% endif %}<span class="arch__sweep"></span></div>
+  <div class="arch__in"><img class="larch__img" src="/assets/img/silk-760.webp" width="760" height="510" alt="" loading="lazy"><span class="larch__word">{{ word }}</span>{% if sub %}<span class="larch__sub">{{ sub }}</span>{% endif %}<span class="arch__sweep"></span></div>
 </div>
 {% endmacro %}
 
@@ -31,6 +31,7 @@
 <section class="cta">
   {{ glow('warm', 'cta__glow') }}
   <div class="wrap cta__inner">
+    {{ arch('/assets/img/magnolia-760.webp', '', 760, 510, 'cta__arch') }}
     <p class="eyebrow" data-reveal>{{ t.first_step }}</p>
     <h2 class="h2" data-lines>{{ text|safe }}</h2>
     {% if sub %}<p class="lead" data-reveal>{{ sub }}</p>{% endif %}

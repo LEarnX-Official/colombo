@@ -1,14 +1,17 @@
 {% extends "base.html" %}
-{% from "_macros.html" import crumbs, glow %}
+{% from "_macros.html" import crumbs, arch %}
 {% block main %}
-<section class="ph ph--short">
+<section class="ph">
   <div class="ph__bg" aria-hidden="true"></div>
-  <div class="wrap">
+  <div class="wrap ph__grid">
+    <div>
     {{ crumbs([(t.home, P.home), (t.contact, "")]) }}
     <p class="eyebrow" data-reveal>{{ t.first_step }}</p>
     <h1 class="h1" data-lines>{{ t.contact_h_html|safe }}</h1>
     <p class="lead" data-reveal>{{ t.contact_lead.replace('{hours}', site.hours) }}</p>
     <p data-reveal><button class="btn btn--dark" type="button" data-book>{{ t.request_consult }}</button></p>
+    </div>
+    {{ arch('/assets/img/loggia-760.webp', '', 760, 510, 'ph__arch', eager=True) }}
   </div>
 </section>
 <section class="clocs">
@@ -44,7 +47,7 @@
 <section class="mapsec">
   <div class="wrap">
     <div class="mapbox" data-map="{{ site.map_query }}">
-      {{ glow('lake', 'mapbox__glow') }}
+      <img class="mapbox__img" src="/assets/img/lake-mist-1264.webp" width="1264" height="848" alt="" loading="lazy">
       <div class="mapbox__in">
         <p class="eyebrow">Clinica Sant'Anna · Lugano</p>
         <p>{{ t.map_text }}</p>

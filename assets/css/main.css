@@ -609,3 +609,48 @@ html.js.no-motion [data-reveal], html.js.no-motion [data-lines], html.js.no-moti
   html.js [data-reveal], html.js [data-lines], html.js [data-focus] { opacity: 1; }
 }
 @media (max-width: 640px) { .nat__word { font-size: 12.5vw; } .hero__title { font-size: 15vw; } }
+
+/* =========================================================================
+   Imagery (generated with Stitch: atmosphere only — no people, no clinic)
+   ========================================================================= */
+.nat__photo { position: absolute; inset: 0; pointer-events: none; }
+.nat__photo img { width: 100%; height: 100%; object-fit: cover; opacity: .5; mix-blend-mode: multiply; }
+
+.larch__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.larch .arch__in::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 55% at 50% 52%, rgba(251, 248, 244, .78), rgba(251, 248, 244, .2) 75%); pointer-events: none; }
+.larch__word, .larch__sub { z-index: 1; }
+
+.cta__arch { width: 150px; margin: 0 auto 30px; }
+.cta__arch .arch__in { aspect-ratio: 4 / 5; }
+.cta__arch img { object-position: 50% 60%; }
+.jr__arch { width: min(300px, 80%); margin-top: 44px; }
+.jr__arch .arch__in { aspect-ratio: 4 / 5; }
+@media (max-width: 900px) { .jr__arch { display: none; } }
+
+.mapbox__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mapbox::after { content: ""; position: absolute; inset: 0; background: radial-gradient(55% 60% at 50% 60%, rgba(247, 242, 236, .7), transparent 75%); pointer-events: none; }
+
+/* Lugano — a day on the lake */
+.lg__layer { position: absolute; inset: 0; }
+.lg__layer img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.lg__dusk { opacity: 0; }
+.lg__fog { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.lg__fog i { position: absolute; left: -30%; width: 160%; height: 34%; border-radius: 50%; background: radial-gradient(closest-side, rgba(247, 242, 236, .7), rgba(247, 242, 236, 0)); filter: blur(14px); animation: fog 38s ease-in-out infinite alternate; }
+.lg__fog i:first-child { top: 30%; }
+.lg__fog i:last-child { top: 48%; height: 26%; animation-duration: 52s; animation-direction: alternate-reverse; opacity: .8; }
+@keyframes fog { from { transform: translateX(-8%); } to { transform: translateX(8%); } }
+.lg__glint { position: absolute; left: -12%; right: -12%; bottom: 0; height: 46%; background: url(/assets/img/water-1264.webp) center / cover no-repeat; mix-blend-mode: soft-light; opacity: .4; pointer-events: none;
+  -webkit-mask-image: linear-gradient(transparent, #000 50%); mask-image: linear-gradient(transparent, #000 50%); animation: glint 22s ease-in-out infinite alternate; }
+@keyframes glint { from { transform: translateX(-5%) scaleY(1); } to { transform: translateX(5%) scaleY(1.06); } }
+.lg__veil { position: absolute; inset: 0; background: radial-gradient(58% 44% at 50% 36%, rgba(247, 242, 236, .84), rgba(247, 242, 236, .35) 55%, rgba(247, 242, 236, 0) 78%); pointer-events: none; }
+.lg__p { font-weight: 500; text-shadow: 0 1px 12px rgba(247, 242, 236, .9); }
+.lg__text { z-index: 2; align-self: start; padding-top: clamp(70px, 11vh, 130px); }
+.lg__h { color: var(--cocoa); }
+.lg__p { color: var(--cocoa); }
+.lg__text .eyebrow { color: var(--cocoa); }
+.lg__time { display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 8px 16px; border-radius: 999px; background: rgba(251, 248, 244, .7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--cocoa); }
+.lg__time i { width: 26px; height: 1px; background: var(--gold); }
+.lg__tod { display: inline-grid; }
+.lg__tod span { grid-area: 1 / 1; text-transform: uppercase; }
+.lg__tod [data-tod="pm"] { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .lg__dusk { opacity: 1; } .lg__tod [data-tod="am"] { opacity: 0; } .lg__tod [data-tod="pm"] { opacity: 1; } }

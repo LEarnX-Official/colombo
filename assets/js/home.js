@@ -31,12 +31,14 @@
       var word = q('.nat__word'), light = q('.nat__light'), never = qa('.nat__never li'), head = qa('.nat__label, .nat__lead'), sign = q('.nat__sign');
       gsap.set(word, { opacity: .18, filter: 'blur(26px)', scale: .9, letterSpacing: '.12em' });
       gsap.set(light, { scale: .55, opacity: .5 });
+      var linen = q('.nat__photo img'); gsap.set(linen, { filter: 'blur(18px)', scale: 1.12 });
       gsap.set(never, { opacity: 0, y: 24, filter: 'blur(8px)' });
       gsap.set([head, sign], { opacity: 0, y: 16 });
       function build() {
         var tl = gsap.timeline({ defaults: { ease: 'none' } });
         tl.to(head, { opacity: 1, y: 0, duration: .5, stagger: .15 }, 0)
           .to(light, { scale: 1.1, opacity: 1, duration: 2.2 }, 0)
+          .to(linen, { filter: 'blur(3px)', scale: 1, duration: 2.4 }, 0)
           .to(word, { opacity: 1, filter: 'blur(0px)', scale: 1, letterSpacing: '-.02em', duration: 1.8, ease: 'power2.out' }, .2)
           .to(never, { opacity: 1, y: 0, filter: 'blur(0px)', duration: .6, stagger: .45, ease: 'power2.out' }, 1.6)
           .to(sign, { opacity: 1, y: 0, duration: .5 }, 3.1)
@@ -47,19 +49,30 @@
       mm.add('(max-width: 900px)', function () { ST.create({ trigger: '.nat', start: 'top 75%', end: 'bottom 70%', scrub: 1, animation: build() }); });
     })();
 
-    /* ===== 7 · A window on Lugano: the arch opens onto the lake ===== */
+    /* ===== 7 · Lugano — a day on the lake: the arch opens, morning mist turns into dusk ===== */
     (function () {
-      var win = q('[data-lake-window]'), h = q('.lg__h'), txt = qa('.lg__text > :not(.lg__h)');
+      var win = q('[data-lake-window]'), mist = q('.lg__mist img'), duskL = q('.lg__dusk'), dusk = q('.lg__dusk img');
+      var fog = q('.lg__fog'), glint = q('.lg__glint'), h = q('.lg__h'), txt = qa('.lg__text > :not(.lg__h)');
+      var clock = q('[data-lg-time]'), am = q('[data-tod="am"]'), pm = q('[data-tod="pm"]'), o = { m: 7 * 60 };
       gsap.set(h, { opacity: 0, yPercent: 30, letterSpacing: '.1em' }); gsap.set(txt, { opacity: 0, y: 16 });
+      function hhmm(v) { var hh = Math.floor(v / 60), mm2 = Math.round(v % 60 / 5) * 5; if (mm2 === 60) { hh++; mm2 = 0; } return (hh < 10 ? '0' : '') + hh + ':' + (mm2 < 10 ? '0' : '') + mm2; }
       function build() {
         return gsap.timeline({ defaults: { ease: 'none' } })
           .fromTo(win, { scale: .52, y: 40 }, { scale: 1, y: 0, duration: 2, ease: 'power2.out' }, 0)
+          .fromTo(mist, { scale: 1.25 }, { scale: 1.06, duration: 3 }, 0)
           .to(h, { opacity: 1, yPercent: 0, letterSpacing: '-.02em', duration: 1.4, ease: 'power2.out' }, .7)
           .to(txt, { opacity: 1, y: 0, duration: .7, stagger: .2 }, 1.3)
-          .to({}, { duration: .5 });
+          /* morning → evening */
+          .to(o, { m: 19 * 60 + 30, duration: 3, onUpdate: function () { clock.textContent = hhmm(o.m); } }, 2.4)
+          .to(duskL, { opacity: 1, duration: 2.2 }, 3)
+          .fromTo(dusk, { scale: 1.14 }, { scale: 1, duration: 3 }, 2.6)
+          .to(fog, { opacity: 0, duration: 1.6 }, 3.2)
+          .to(glint, { opacity: .7, duration: 1.6 }, 3.6)
+          .to(am, { opacity: 0, duration: .4 }, 3.9).to(pm, { opacity: 1, duration: .4 }, 4.1)
+          .to({}, { duration: .6 });
       }
-      mm.add('(min-width: 901px)', function () { ST.create({ trigger: '.lg', start: 'top top', end: '+=110%', pin: '.lg__pin', scrub: 1, animation: build(), anticipatePin: 1 }); });
-      mm.add('(max-width: 900px)', function () { ST.create({ trigger: '.lg', start: 'top 80%', end: 'top 10%', scrub: 1, animation: build() }); });
+      mm.add('(min-width: 901px)', function () { ST.create({ trigger: '.lg', start: 'top top', end: '+=190%', pin: '.lg__pin', scrub: 1, animation: build(), anticipatePin: 1 }); });
+      mm.add('(max-width: 900px)', function () { ST.create({ trigger: '.lg', start: 'top top', end: '+=120%', pin: '.lg__pin', scrub: 1, animation: build() }); });
     })();
 
     /* ===== 8 · Conversation: the arch monogram glows in ===== */

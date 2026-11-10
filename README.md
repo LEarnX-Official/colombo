@@ -7,6 +7,11 @@ chooser) → The journey (consultation → plan → surgery in Lugano → recove
 Discretion → A window on Lugano → Begin with a conversation. Academic material lives on the Academy page.
 No artwork from the old site is used — only its content, photographs, books, papers and course posters.
 
+**Atmosphere images** (`lake-mist`, `lake-dusk`, `loggia`, `linen`, `silk`, `magnolia`, `water`) were generated with
+Google Stitch (project “Luce naturale imagery”). They show no people, patients, results, clinic or doctor — only
+mood. They are AI-generated: before launch, consider replacing the two Lake Lugano images with real photography
+of Lugano, and do not present them as photos of the clinic.
+
 A static, quietly luxurious rebuild of drgiuseppecolombo.com. It follows
 `../STORYLINE-AND-COMPONENT-DESIGN.md` and uses only the original site's own content.
 
