@@ -30,6 +30,23 @@
   </section>
   {% endif %}
 
+  {% set an = anatomy.get(p.key) %}
+  {% if an %}
+  <section class="anat">
+    <div class="wrap anat__grid">
+      <figure class="anat__fig" data-anat>
+        <div class="anat__paper"><img src="/assets/img/{{ an }}-1264.webp" srcset="/assets/img/{{ an }}-760.webp 760w, /assets/img/{{ an }}-1264.webp 1264w" sizes="(min-width: 900px) 46vw, 92vw" width="1264" height="848" alt="{{ L.anat[p.key] }}" loading="lazy"></div>
+        <span class="anat__lens" aria-hidden="true"></span>
+      </figure>
+      <figcaption class="anat__cap">
+        <p class="eyebrow" data-reveal>{{ L.anat_label }} · FIG. {{ '%02d' % index }}</p>
+        <p class="anat__text" data-focus>{{ L.anat[p.key] }}</p>
+        <p class="anat__note" data-reveal>{{ L.anat_note }}</p>
+      </figcaption>
+    </div>
+  </section>
+  {% endif %}
+
   <section class="prose-sec">
     <div class="wrap prose-sec__grid">
       <p class="eyebrow" data-reveal>{{ t.the_procedure }}</p>

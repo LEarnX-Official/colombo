@@ -266,7 +266,7 @@ def main():
         site = g(M, "SITE")
         html = env.get_template(tpl).render(
             lang=lang, t=ui, h=g(M, "HOME"), L=g(M, "LUCE"), P=d["P"], nav=d["nav"], site=site, quotes=g(M, "QUOTES"),
-            concerns=C.CONCERNS, proc_concern=C.PROC_CONCERN, procs_all=d["procs"],
+            concerns=C.CONCERNS, proc_concern=C.PROC_CONCERN, procs_all=d["procs"], anatomy=C.PROC_ANATOMY,
             alts=alts, current=ctx.pop("current", alts[lang]), year=date.today().year,
             js_i18n=json.dumps(ui["js"], ensure_ascii=False), **ctx)
         write(alts[lang], html)
@@ -330,7 +330,7 @@ def main():
     ui = g(M, "UI")
     html = env.get_template("404.html").render(
         lang="it", t=ui, h=g(M, "HOME"), L=g(M, "LUCE"), P=d["P"], nav=d["nav"], site=g(M, "SITE"), quotes=g(M, "QUOTES"),
-        concerns=C.CONCERNS, proc_concern=C.PROC_CONCERN, procs_all=d["procs"],
+        concerns=C.CONCERNS, proc_concern=C.PROC_CONCERN, procs_all=d["procs"], anatomy=C.PROC_ANATOMY,
         alts={l: D[l]["P"]["home"] for l in LANGS}, current="", year=date.today().year,
         js_i18n=json.dumps(ui["js"], ensure_ascii=False), title=f"{ui['nf_title']} — {ui['suffix']}", meta="",
         body_class="page-404")

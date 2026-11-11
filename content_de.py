@@ -491,3 +491,21 @@ LUCE = {
     "morning": "Morgen", "evening": "Abend",
     "concern_word": "Bereich",
 }
+
+LUCE["anat_label"] = "— Anatomie"
+LUCE["anat_note"] = "Illustrative Zeichnung — kein medizinisches Schema. Jede Anatomie wird in der Beratung individuell beurteilt."
+LUCE["anat"] = {
+    "facelift": "Die Schichten des Gesichts: Haut, Unterhautfett und SMAS — darunter liegen die Nerven, die das Gesicht bewegen, die wichtigsten Gefäße und die Muskeln des Mundes.",
+    "blepharoplasty": "Die Lider: dünne Haut, der Ringmuskel, der das Auge schließt, und die Fettpolster darunter — zwei im Oberlid, drei im Unterlid.",
+    "brow-lift": "Das obere Gesichtsdrittel: die Braue und die Muskeln um die Augen, wo das äußere Brauendrittel abzusinken neigt.",
+    "botulinum-toxin": "Die Mimikmuskeln: Stirn, Brauen und die Augenpartie — sowie Masseter und Platysma, die ebenfalls mit Botulinumtoxin behandelt werden.",
+    "otoplasty": "Die Ohrmuschel und ihre Knorpelfalten — die Anthelix ist die Hauptfalte des Ohrs.",
+    "lip-lift": "Das Profil der Lippe: die Columella am Nasenansatz, der Amorbogen und das Lippenrot.",
+    "chin": "Die Harmonie des Profils: Die Nasenspitze sollte etwas weiter nach vorne ragen als das Kinn.",
+    "hyaluronic-acid": "Die Schichten der Haut: Hyaluronsäure ist Teil des Bindegewebes der Lederhaut, zwischen Kollagen- und elastischen Fasern.",
+    "biorevitalisation": "Die Schichten der Haut, in denen die Biorevitalisierung die Bildung von Kollagen und Elastin fördert.",
+    "mastopexy": "Die Brust im Profil: Haut, Drüsengewebe und Fett, auf der Brustwand ruhend.",
+    "augmentation": "Die Brust im Profil: Haut, Drüsengewebe und Fett, auf der Brustwand ruhend.",
+    "reduction": "Die Brust im Profil: Haut, Drüsengewebe und Fett, auf der Brustwand ruhend.",
+    "gynecomastia": "Die männliche Brust: Ansammlung von Fett (falsche Gynäkomastie), von Drüsengewebe (echte) — oder beides (gemischte).",
+}

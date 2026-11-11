@@ -174,6 +174,21 @@
     });
   }
 
+  /* ------------------------------------------------ anatomy plates: focus, then a lens inspects the drawing */
+  function initAnatomy() {
+    qa('[data-anat]').forEach(function (fig) {
+      var img = q('img', fig), lens = q('.anat__lens', fig);
+      if (reduce) return;
+      gsap.set(img, { scale: 1.12, filter: 'blur(8px)' });
+      ST.create({ trigger: fig, start: 'top 80%', once: true, onEnter: function () { gsap.to(img, { scale: 1, filter: 'blur(0px)', duration: 2, ease: SOFT }); } });
+      gsap.timeline({ scrollTrigger: { trigger: fig, start: 'top 70%', end: 'bottom 25%', scrub: 1 } })
+        .fromTo(lens, { opacity: 0, left: '22%', top: '62%' }, { opacity: 1, duration: .2 })
+        .to(lens, { left: '50%', top: '42%', duration: .4, ease: 'sine.inOut' })
+        .to(lens, { left: '76%', top: '55%', duration: .4, ease: 'sine.inOut' })
+        .to(lens, { opacity: 0, duration: .2 });
+    });
+  }
+
   /* ------------------------------------------------ counters + tilt */
   function initCounters() {
     if (reduce) return;
@@ -311,7 +326,7 @@
   function boot() {
     initGlows();
     if (Site.initHome) Site.initHome();
-    initReveals(); initArches(); initConcerns(); initJourneys(); initCounters(); initTilt();
+    initReveals(); initArches(); initConcerns(); initJourneys(); initAnatomy(); initCounters(); initTilt();
     initHeader(); initMenu(); initBooking(); initClock(); initVideos(); initMap(); initFilters(); initReadbar();
     initTransitions();
     window.addEventListener('load', function () { ST.refresh(); });

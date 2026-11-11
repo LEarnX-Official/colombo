@@ -476,3 +476,21 @@ LUCE = {
     "morning": "Mattino", "evening": "Sera",
     "concern_word": "Area",
 }
+
+LUCE["anat_label"] = "— Anatomia"
+LUCE["anat_note"] = "Disegno illustrativo — non uno schema medico. Ogni anatomia viene valutata individualmente durante la consulenza."
+LUCE["anat"] = {
+    "facelift": "Gli strati del volto: pelle, grasso sottocutaneo e SMAS — al di sotto del quale si trovano i nervi deputati alla mobilità del viso, le arterie più importanti e i muscoli della bocca.",
+    "blepharoplasty": "Le palpebre: la pelle sottile, il muscolo orbicolare che chiude l'occhio e le borse di grasso al di sotto — due nella palpebra superiore, tre in quella inferiore.",
+    "brow-lift": "Il terzo superiore del volto: il sopracciglio e i muscoli intorno agli occhi, dove il terzo laterale del sopracciglio tende a scendere.",
+    "botulinum-toxin": "I muscoli mimici: fronte, sopracciglia e regione perioculare — e il massetere e il platisma, anch'essi trattati con il botulino.",
+    "otoplasty": "Il padiglione auricolare e le sue pieghe cartilaginee — l'antelice è la piega maggiore dell'orecchio.",
+    "lip-lift": "Il profilo del labbro: la columella alla base del naso, l'arco di Cupido e il vermiglio.",
+    "chin": "L'armonia del profilo: la punta del naso deve essere lievemente più avanti del mento.",
+    "hyaluronic-acid": "Gli strati della pelle: l'acido ialuronico è un componente del tessuto connettivo del derma, tra le fibre collagene ed elastiche.",
+    "biorevitalisation": "Gli strati della pelle, dove la biorivitalizzazione favorisce la produzione di collagene ed elastina.",
+    "mastopexy": "Il seno di profilo: pelle, tessuto ghiandolare e grasso, appoggiati sulla parete toracica.",
+    "augmentation": "Il seno di profilo: pelle, tessuto ghiandolare e grasso, appoggiati sulla parete toracica.",
+    "reduction": "Il seno di profilo: pelle, tessuto ghiandolare e grasso, appoggiati sulla parete toracica.",
+    "gynecomastia": "Il torace maschile: accumulo di grasso (ginecomastia falsa), di tessuto ghiandolare (vera) — o entrambi (mista).",
+}

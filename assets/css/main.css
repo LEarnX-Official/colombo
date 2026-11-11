@@ -654,3 +654,17 @@ html.js.no-motion [data-reveal], html.js.no-motion [data-lines], html.js.no-moti
 .lg__tod span { grid-area: 1 / 1; text-transform: uppercase; }
 .lg__tod [data-tod="pm"] { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .lg__dusk { opacity: 1; } .lg__tod [data-tod="am"] { opacity: 0; } .lg__tod [data-tod="pm"] { opacity: 1; } }
+
+/* Anatomy plate (illustrative drawings) */
+.anat { padding: 0 0 clamp(70px, 9vw, 130px); }
+.anat__grid { display: grid; grid-template-columns: 7fr 5fr; gap: 5vw; align-items: center; }
+.anat__fig { position: relative; border-radius: var(--r); overflow: hidden; background: #F3EBDD; box-shadow: 0 1px 0 var(--line), 0 30px 60px -40px rgba(46, 33, 28, .45); }
+.anat__paper img { width: 100%; height: auto; mix-blend-mode: multiply; }
+.anat__lens { position: absolute; width: 180px; height: 180px; border-radius: 50%; border: 1px solid rgba(169, 131, 79, .7); box-shadow: 0 0 0 9999px rgba(243, 235, 221, .0); pointer-events: none; opacity: 0; transform: translate(-50%, -50%); left: 50%; top: 50%; }
+.anat__text { font-family: var(--serif); font-weight: 300; font-size: clamp(22px, 2vw, 30px); line-height: 1.35; }
+.anat__note { font-size: 13px; color: var(--taupe); margin-top: 18px; }
+@media (max-width: 900px) { .anat__grid { grid-template-columns: 1fr; } }
+.anat__fig { isolation: isolate; }
+.anat__paper { overflow: hidden; }
+.anat__paper img { transform-origin: 50% 50%; }
+.anat__lens { width: 34%; height: auto; aspect-ratio: 1; top: 50%; left: 20%; box-shadow: 0 0 0 1px rgba(255, 248, 235, .5) inset, 0 0 0 9999px rgba(243, 235, 221, .28); background: radial-gradient(closest-side, rgba(255, 246, 228, .25), transparent); mix-blend-mode: normal; }

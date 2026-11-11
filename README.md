@@ -12,6 +12,12 @@ Google Stitch (project “Luce naturale imagery”). They show no people, patien
 mood. They are AI-generated: before launch, consider replacing the two Lake Lugano images with real photography
 of Lugano, and do not present them as photos of the clinic.
 
+**Anatomy plates** (`anat-*`: face layers, muscles of expression, outer ear, breast in profile, skin layers,
+facial profile, male chest) were also generated with Stitch, in a classical sepia-and-watercolour atlas style
+with no text inside the images. Captions come only from Dr. Colombo's own texts, and every plate is marked as an
+illustrative drawing, not a medical diagram. **Dr. Colombo should review them before launch** — AI anatomy can be
+stylised or imprecise. Mapping procedure → plate: `PROC_ANATOMY` in `content.py`.
+
 A static, quietly luxurious rebuild of drgiuseppecolombo.com. It follows
 `../STORYLINE-AND-COMPONENT-DESIGN.md` and uses only the original site's own content.
 

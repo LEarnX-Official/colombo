@@ -755,3 +755,28 @@ LUCE = {
     "morning": "Morning", "evening": "Evening",
     "concern_word": "Area",
 }
+
+# Anatomy illustrations (generated with Stitch, illustrative only) -> procedures
+PROC_ANATOMY = {
+    "facelift": "anat-face-layers", "blepharoplasty": "anat-muscles", "brow-lift": "anat-muscles",
+    "botulinum-toxin": "anat-muscles", "otoplasty": "anat-ear", "lip-lift": "anat-profile", "chin": "anat-profile",
+    "hyaluronic-acid": "anat-skin", "biorevitalisation": "anat-skin",
+    "mastopexy": "anat-breast", "augmentation": "anat-breast", "reduction": "anat-breast", "gynecomastia": "anat-chest",
+}
+LUCE["anat_label"] = "— Anatomy"
+LUCE["anat_note"] = "Illustrative drawing — not a medical diagram. Every anatomy is assessed individually during the consultation."
+LUCE["anat"] = {
+    "facelift": "The layers of the face: skin, subcutaneous fat and the SMAS — beneath which lie the nerves that move the face, the main vessels and the muscles of the mouth.",
+    "blepharoplasty": "The eyelids: thin skin, the orbicularis muscle that closes the eye, and the fat pads beneath it — two in the upper lid, three in the lower.",
+    "brow-lift": "The upper third of the face: the brow and the muscles around the eyes, where the outer third of the eyebrow tends to descend.",
+    "botulinum-toxin": "The muscles of expression: forehead, brows and the area around the eyes — and the masseter and platysma, also treated with botulinum toxin.",
+    "otoplasty": "The outer ear and its cartilage folds — the antihelix is the main fold of the ear.",
+    "lip-lift": "The profile of the lip: the columella at the base of the nose, the Cupid's bow and the vermilion.",
+    "chin": "The harmony of the profile: the tip of the nose should project slightly further forward than the chin.",
+    "hyaluronic-acid": "The layers of the skin: hyaluronic acid is part of the connective tissue of the dermis, among the collagen and elastic fibres.",
+    "biorevitalisation": "The layers of the skin, where biorevitalisation encourages the production of collagen and elastin.",
+    "mastopexy": "The breast in profile: skin, glandular tissue and fat, resting on the chest wall.",
+    "augmentation": "The breast in profile: skin, glandular tissue and fat, resting on the chest wall.",
+    "reduction": "The breast in profile: skin, glandular tissue and fat, resting on the chest wall.",
+    "gynecomastia": "The male chest: an accumulation of fat (false gynecomastia), of glandular tissue (true) — or both (mixed).",
+}
