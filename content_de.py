@@ -446,3 +446,66 @@ HOME = {
     "convo_h_pre": "Beginnen Sie mit einem", "convo_word": "Gespräch",
     "convo_lead": "Sagen Sie uns, worüber Sie sprechen möchten. Das Sekretariat antwortet {hours}.",
 }
+
+LUCE = {
+    "kicker": "Dr. Giuseppe Colombo · Plastische Chirurgie · Lugano",
+    "nat_label": "— Natürlichkeit",
+    "nat_word": "Natürlichkeit",
+    "nat_lead": "Ein einziges Wort leitet seine Arbeit.",
+    "nat_never": ["Niemals dem Übermaß nachgeben.", "Niemals Menschen verfremden.", "Nur das Beste in ihnen zur Geltung bringen."],
+    "meet": "Dr. Colombo kennenlernen",
+    "concern_label": "— Wo beginnen",
+    "concern_h_html": "Was möchten Sie <em>verfeinern</em>?",
+    "concern_lead": "Wählen Sie einen Bereich. Jede Behandlung wird mit Dr. Colombos eigenen Worten erklärt.",
+    "concerns": {
+        "face": ("Gesicht & Hals", "Unteres Gesicht, Hals und Profil"),
+        "eyes": ("Die Augen", "Lider, Brauen und Mimikfalten"),
+        "lips": ("Die Lippen", "Form und Definition der Oberlippe"),
+        "skin": ("Die Haut", "Feuchtigkeit, Spannkraft und Ausstrahlung"),
+        "ears": ("Die Ohren", "Form und Stellung der Ohrmuschel"),
+        "breast": ("Die Brust", "Straffung, Volumen, Verkleinerung — und die männliche Brust"),
+        "restore": ("Rekonstruktion", "Das Gesicht nach Hautkrebschirurgie"),
+    },
+    "see_all": "Alle Behandlungen",
+    "journey_label": "— Der Weg",
+    "journey_h_html": "Vom ersten Gespräch<br>zu einem <em>natürlichen</em> Ergebnis.",
+    "journey": [
+        ("Beratung", "Ein erstes Gespräch in Lugano, Zürich oder Italien — Ihre Wünsche, Ihre Anatomie, Ihre Fragen."),
+        ("Ein Plan für Sie", "Jeder Fall wird individuell beurteilt. Der Eingriff wird für Sie gewählt — nie für einen Trend."),
+        ("Der Eingriff in Lugano", "Clinica Sant'Anna — Praxis und Operationssaal unter einem Dach."),
+        ("Die Erholung", "Sie hängt vom Eingriff ab: Nach einer Lidstraffung zum Beispiel ist das Aussehen nach 7–10 Tagen wieder normal."),
+        ("Ein natürliches Ergebnis", "Das Gewebe setzt sich über Monate — bei den Lidern wird das Endergebnis nach etwa einem Jahr beurteilt."),
+    ],
+    "trust_label": "— Erfahrung",
+    "trust_h_html": "Ausgebildet von Meistern.<br>Er <em>lehrt</em> Kollegen.",
+    "trust": [
+        ("2005", "Medizinstudium, Genua", "110/110 cum laude — danach Facharzt, 50/50 cum laude, und ein Ph.D."),
+        ("320+", "Originalfotografien", "in dem von ihm herausgegebenen Springer-Atlas der ästhetischen Medizin und Chirurgie."),
+        ("19", "Publikationen", "in internationalen Fachzeitschriften, von 2008 bis 2021."),
+        ("2010", "Präparationskurse", "seit 2010 für Chirurgen in Nizza, Madrid und Cremona geleitet."),
+    ],
+    "trust_more": "Die Akademie entdecken",
+    "place_label": "— Der Ort",
+    "proc_journey": "— Ihr Weg",
+    "facts_title": "Auf einen Blick",
+    "morning": "Morgen", "evening": "Abend",
+    "concern_word": "Bereich",
+}
+
+LUCE["anat_label"] = "— Anatomie"
+LUCE["anat_note"] = "Illustrative Zeichnung — kein medizinisches Schema. Jede Anatomie wird in der Beratung individuell beurteilt."
+LUCE["anat"] = {
+    "facelift": "Die Schichten des Gesichts: Haut, Unterhautfett und SMAS — darunter liegen die Nerven, die das Gesicht bewegen, die wichtigsten Gefäße und die Muskeln des Mundes.",
+    "blepharoplasty": "Die Lider: dünne Haut, der Ringmuskel, der das Auge schließt, und die Fettpolster darunter — zwei im Oberlid, drei im Unterlid.",
+    "brow-lift": "Das obere Gesichtsdrittel: die Braue und die Muskeln um die Augen, wo das äußere Brauendrittel abzusinken neigt.",
+    "botulinum-toxin": "Die Mimikmuskeln: Stirn, Brauen und die Augenpartie — sowie Masseter und Platysma, die ebenfalls mit Botulinumtoxin behandelt werden.",
+    "otoplasty": "Die Ohrmuschel und ihre Knorpelfalten — die Anthelix ist die Hauptfalte des Ohrs.",
+    "lip-lift": "Das Profil der Lippe: die Columella am Nasenansatz, der Amorbogen und das Lippenrot.",
+    "chin": "Die Harmonie des Profils: Die Nasenspitze sollte etwas weiter nach vorne ragen als das Kinn.",
+    "hyaluronic-acid": "Die Schichten der Haut: Hyaluronsäure ist Teil des Bindegewebes der Lederhaut, zwischen Kollagen- und elastischen Fasern.",
+    "biorevitalisation": "Die Schichten der Haut, in denen die Biorevitalisierung die Bildung von Kollagen und Elastin fördert.",
+    "mastopexy": "Die Brust im Profil: Haut, Drüsengewebe und Fett, auf der Brustwand ruhend.",
+    "augmentation": "Die Brust im Profil: Haut, Drüsengewebe und Fett, auf der Brustwand ruhend.",
+    "reduction": "Die Brust im Profil: Haut, Drüsengewebe und Fett, auf der Brustwand ruhend.",
+    "gynecomastia": "Die männliche Brust: Ansammlung von Fett (falsche Gynäkomastie), von Drüsengewebe (echte) — oder beides (gemischte).",
+}

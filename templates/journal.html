@@ -1,38 +1,37 @@
 {% extends "base.html" %}
 {% from "_macros.html" import crumbs %}
 {% block main %}
-<section class="phero phero--short">
+<section class="ph ph--short">
+  <div class="ph__bg" aria-hidden="true"></div>
   <div class="wrap">
     {{ crumbs([(t.home, P.home), (t.academy, P.academy), (t.journal, "")]) }}
-    <h1 class="phero__h" data-lines>{{ t.journal }}</h1>
+    <h1 class="h1" data-lines>{{ t.journal }}</h1>
     <p class="lead" data-reveal>{{ t.journal_lead }}</p>
-    <div class="pubs__filters" role="group" aria-label="{{ t.filter_cat }}" data-reveal>
+    <div class="chips" role="group" aria-label="{{ t.filter_cat }}" data-reveal>
       <button type="button" class="chip is-active" data-jfilter="all">{{ t.all }}</button>
       {% for c in cats %}<button type="button" class="chip" data-jfilter="{{ c }}">{{ t.cats[c] }}</button>{% endfor %}
     </div>
   </div>
 </section>
-
 <section class="jlist">
   <div class="wrap">
     {% set feat = journal[0] %}
     <a class="jfeat" href="{{ feat.href }}" data-cat="{{ feat.category }}" data-reveal>
-      <div class="jfeat__art">{{ drawing('profile-jaw', 'jfeat__ln', mode='enter') }}</div>
       <div>
-        <span class="label">{{ t.latest }} · {{ t.cats[feat.category] }} · {{ feat.minutes }} {{ t.min_read }}</span>
+        <span class="jcard__k">{{ t.latest }} · {{ t.cats[feat.category] }} · {{ feat.minutes }} {{ t.min_read }}</span>
         <h2 class="jfeat__h">{{ feat.title }}</h2>
         {% if lang != 'it' %}<p class="jcard__it" lang="it">{{ feat.it_title }}</p>{% endif %}
-        <p lang="it">{{ feat.excerpt }}</p>
-        <span class="muted">{{ feat.date_fmt }}</span>
+        <span class="jcard__d">{{ feat.date_fmt }}</span>
       </div>
+      <p lang="it" class="jfeat__ex">{{ feat.excerpt }}</p>
     </a>
     <div class="jgrid jgrid--two">
       {% for a in journal[1:] %}
       <a class="jcard" href="{{ a.href }}" data-cat="{{ a.category }}" data-reveal>
-        <span class="label">{{ t.cats[a.category] }} · {{ a.minutes }} {{ t.min }}</span>
+        <span class="jcard__k">{{ t.cats[a.category] }} · {{ a.minutes }} {{ t.min }}</span>
         <h2 class="jcard__h">{{ a.title }}</h2>
         {% if lang != 'it' %}<p class="jcard__it" lang="it">{{ a.it_title }}</p>{% endif %}
-        <span class="muted">{{ a.date_fmt }}</span>
+        <span class="jcard__d">{{ a.date_fmt }}</span>
       </a>
       {% endfor %}
     </div>

@@ -1,44 +1,37 @@
 {% extends "base.html" %}
-{% from "_macros.html" import cta, crumbs %}
+{% from "_macros.html" import cta, crumbs, lightarch %}
 {% block main %}
-<section class="phero phero--proc">
-  <div class="wrap phero__grid">
-    <div class="phero__text">
+<section class="ph">
+  <div class="ph__bg" aria-hidden="true"></div>
+  <div class="wrap ph__grid">
+    <div>
       {{ crumbs([(t.home, P.home), (area.title, P.face), (r.title, "")]) }}
-      <h1 class="phero__h" data-lines>{{ r.title }}</h1>
+      <p class="eyebrow" data-reveal>{{ L.concerns['restore'][0] }}</p>
+      <h1 class="h1" data-lines>{{ r.title }}</h1>
       <p class="lead" data-reveal>{{ r.lede }}</p>
     </div>
-    <div class="phero__art phero__art--wide">{{ drawing(r.drawing, 'phero__ln', mode='load') }}</div>
+    {{ lightarch(L.concerns['restore'][0], L.concerns['restore'][1], 'ph__arch', 'restore') }}
   </div>
 </section>
-
 <section class="pull">
   <div class="wrap">
-    <blockquote class="pull__q" data-reveal>
-      <p>“{{ r.focus }}”</p>
-      <footer>— Dr. Giuseppe Colombo</footer>
-    </blockquote>
+    <blockquote class="pull__q"><p data-focus>“{{ r.focus }}”</p><footer data-reveal>— Dr. Giuseppe Colombo</footer></blockquote>
     <ul class="tags" data-reveal>{% for a in r.areas %}<li>{{ a }}</li>{% endfor %}</ul>
   </div>
 </section>
-
-<section class="prose-sec">
+<section class="prose-sec prose-sec--top">
   <div class="wrap prose-sec__grid">
-    <p class="label prose-sec__label" data-reveal>{{ t.purpose }}</p>
-    <div class="prose">{% for para in r.body %}<p data-reveal>{{ para }}</p>{% endfor %}</div>
+    <p class="eyebrow" data-reveal>{{ t.purpose }}</p>
+    <div class="prose prose--lg">{% for para in r.body %}<p data-reveal>{{ para }}</p>{% endfor %}</div>
   </div>
 </section>
-
 <section class="techs">
   <div class="wrap">
-    <p class="label" data-reveal>{{ t.techniques }}</p>
-    <ol class="techs__list">
-      {% for name, d in r.techniques %}
-      <li data-reveal><span class="techs__n">{{ '%02d' % loop.index }}</span><h2 class="techs__h">{{ name }}</h2><p>{{ d }}</p></li>
-      {% endfor %}
+    <p class="eyebrow" data-reveal>{{ t.techniques }}</p>
+    <ol class="facts__grid techs__grid">
+      {% for name, d in r.techniques %}<li class="fact" data-reveal><span class="pj__n">0{{ loop.index }}</span><h2 class="h4">{{ name }}</h2><p>{{ d }}</p></li>{% endfor %}
     </ol>
   </div>
 </section>
-
 {{ cta(t, t.begin_full_html) }}
 {% endblock %}

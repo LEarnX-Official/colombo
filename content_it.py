@@ -431,3 +431,66 @@ HOME = {
     "convo_h_pre": "Inizia con una", "convo_word": "conversazione",
     "convo_lead": "Raccontaci di che cosa vorresti parlare. La segreteria risponde {hours}.",
 }
+
+LUCE = {
+    "kicker": "Dr. Giuseppe Colombo · Chirurgia plastica · Lugano",
+    "nat_label": "— Naturalezza",
+    "nat_word": "naturalezza",
+    "nat_lead": "Una sola parola guida la sua pratica.",
+    "nat_never": ["Mai cedere agli eccessi.", "Mai stravolgere le persone.", "Solo valorizzarle al meglio."],
+    "meet": "Chi sono",
+    "concern_label": "— Da dove iniziare",
+    "concern_h_html": "Che cosa vorresti <em>migliorare</em>?",
+    "concern_lead": "Scegli un'area. Ogni trattamento è spiegato con le parole del Dr. Colombo.",
+    "concerns": {
+        "face": ("Volto e collo", "Terzo inferiore del volto, collo e profilo"),
+        "eyes": ("Lo sguardo", "Palpebre, sopracciglia e rughe d'espressione"),
+        "lips": ("Le labbra", "Forma e definizione del labbro superiore"),
+        "skin": ("La pelle", "Idratazione, tono e luminosità"),
+        "ears": ("Le orecchie", "Forma e posizione del padiglione"),
+        "breast": ("Il seno", "Sollevamento, volume, riduzione — e il torace maschile"),
+        "restore": ("Ricostruzione", "Il volto dopo la chirurgia oncologica cutanea"),
+    },
+    "see_all": "Tutti i trattamenti",
+    "journey_label": "— Il percorso",
+    "journey_h_html": "Dalla prima conversazione<br>a un risultato <em>naturale</em>.",
+    "journey": [
+        ("Consulenza", "Un primo incontro a Lugano, Zurigo o in Italia — i tuoi desideri, la tua anatomia, le tue domande."),
+        ("Un piano per te", "Ogni caso viene valutato individualmente. L'intervento è scelto per te — mai per una moda."),
+        ("L'intervento a Lugano", "Clinica Sant'Anna — studio e sala operatoria nella stessa sede."),
+        ("Il recupero", "Dipende dall'intervento: dopo una blefaroplastica, ad esempio, l'aspetto torna normale in 7–10 giorni."),
+        ("Un risultato naturale", "Le strutture si assestano lentamente nei mesi — per le palpebre il risultato definitivo si valuta dopo circa un anno."),
+    ],
+    "trust_label": "— Esperienza",
+    "trust_h_html": "Formato dai maestri.<br><em>Docente</em> per i colleghi.",
+    "trust": [
+        ("2005", "Laurea in Medicina, Genova", "110/110 con lode — poi la specializzazione, 50/50 con lode, e il Ph.D."),
+        ("320+", "fotografie originali", "nell'atlante Springer di medicina e chirurgia estetica di cui è curatore."),
+        ("19", "pubblicazioni", "su riviste internazionali, dal 2008 al 2021."),
+        ("2010", "corsi di dissezione", "diretti per i chirurghi a Nizza, Madrid e Cremona dal 2010."),
+    ],
+    "trust_more": "Scopri l'Academy",
+    "place_label": "— Il luogo",
+    "proc_journey": "— Il tuo percorso",
+    "facts_title": "In sintesi",
+    "morning": "Mattino", "evening": "Sera",
+    "concern_word": "Area",
+}
+
+LUCE["anat_label"] = "— Anatomia"
+LUCE["anat_note"] = "Disegno illustrativo — non uno schema medico. Ogni anatomia viene valutata individualmente durante la consulenza."
+LUCE["anat"] = {
+    "facelift": "Gli strati del volto: pelle, grasso sottocutaneo e SMAS — al di sotto del quale si trovano i nervi deputati alla mobilità del viso, le arterie più importanti e i muscoli della bocca.",
+    "blepharoplasty": "Le palpebre: la pelle sottile, il muscolo orbicolare che chiude l'occhio e le borse di grasso al di sotto — due nella palpebra superiore, tre in quella inferiore.",
+    "brow-lift": "Il terzo superiore del volto: il sopracciglio e i muscoli intorno agli occhi, dove il terzo laterale del sopracciglio tende a scendere.",
+    "botulinum-toxin": "I muscoli mimici: fronte, sopracciglia e regione perioculare — e il massetere e il platisma, anch'essi trattati con il botulino.",
+    "otoplasty": "Il padiglione auricolare e le sue pieghe cartilaginee — l'antelice è la piega maggiore dell'orecchio.",
+    "lip-lift": "Il profilo del labbro: la columella alla base del naso, l'arco di Cupido e il vermiglio.",
+    "chin": "L'armonia del profilo: la punta del naso deve essere lievemente più avanti del mento.",
+    "hyaluronic-acid": "Gli strati della pelle: l'acido ialuronico è un componente del tessuto connettivo del derma, tra le fibre collagene ed elastiche.",
+    "biorevitalisation": "Gli strati della pelle, dove la biorivitalizzazione favorisce la produzione di collagene ed elastina.",
+    "mastopexy": "Il seno di profilo: pelle, tessuto ghiandolare e grasso, appoggiati sulla parete toracica.",
+    "augmentation": "Il seno di profilo: pelle, tessuto ghiandolare e grasso, appoggiati sulla parete toracica.",
+    "reduction": "Il seno di profilo: pelle, tessuto ghiandolare e grasso, appoggiati sulla parete toracica.",
+    "gynecomastia": "Il torace maschile: accumulo di grasso (ginecomastia falsa), di tessuto ghiandolare (vera) — o entrambi (mista).",
+}

@@ -1,18 +1,41 @@
+{# ---------- Light field: a soft animated WebGL light (CSS gradient fallback) ---------- #}
+{% macro glow(palette="warm", cls="") %}<div class="glow glow--{{ palette }} {{ cls }}" aria-hidden="true"><canvas data-glow="{{ palette }}"></canvas></div>{% endmacro %}
+
+{# ---------- Arch: the window of light that frames images ---------- #}
+{% macro arch(src, alt, w, h, cls="", sizes="(min-width: 900px) 34vw, 80vw", srcset="", eager=False) %}
+<figure class="arch {{ cls }}" data-arch>
+  <div class="arch__in">
+    <img src="{{ src }}"{% if srcset %} srcset="{{ srcset }}" sizes="{{ sizes }}"{% endif %} width="{{ w }}" height="{{ h }}" alt="{{ alt }}"{% if not eager %} loading="lazy"{% else %} fetchpriority="high"{% endif %}>
+    <span class="arch__sweep" aria-hidden="true"></span>
+  </div>
+</figure>
+{% endmacro %}
+
+{% macro portrait(t, cls="", eager=False) %}{{ arch('/assets/img/portrait-a-800.webp', t.portrait_alt, 1483, 1920, cls, srcset='/assets/img/portrait-a-800.webp 800w, /assets/img/portrait-a-1400.webp 1400w', eager=eager) }}{% endmacro %}
+
+{# ---------- Light arch (no image): a soft gradient window with a word ---------- #}
+{% macro lightarch(word, sub="", cls="", img="") %}
+<div class="larch {{ cls }}{% if img %} larch--photo larch--{{ img }}{% endif %}" data-arch aria-hidden="true">
+  <div class="arch__in">{% if img %}<span class="larch__ph"><img class="larch__img" src="/assets/img/cn-{{ img }}-760.webp" width="760" height="1018" alt="" loading="lazy" decoding="async"></span>{% else %}<img class="larch__img" src="/assets/img/silk-760.webp" width="760" height="510" alt="" loading="lazy">{% endif %}<span class="larch__word">{{ word }}</span>{% if sub %}<span class="larch__sub">{{ sub }}</span>{% endif %}<span class="arch__sweep"></span></div>
+</div>
+{% endmacro %}
+
 {% macro video(id, title, t) %}
 <button type="button" class="vid" data-yt="{{ id }}" aria-label="{{ t.play }}: {{ title }}">
-  <img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
-  <span class="vid__play" aria-hidden="true"></span>
+  <span class="vid__frame"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid__play" aria-hidden="true"></span></span>
   <span class="vid__t">{{ title }}</span>
 </button>
 {% endmacro %}
 
 {% macro cta(t, text, sub="") %}
 <section class="cta">
+  {{ glow('warm', 'cta__glow') }}
   <div class="wrap cta__inner">
-    <p class="label" data-reveal>{{ t.first_step }}</p>
-    <h2 class="h1" data-lines>{{ text|safe }}</h2>
+    {{ arch('/assets/img/magnolia-760.webp', '', 760, 510, 'cta__arch') }}
+    <p class="eyebrow" data-reveal>{{ t.first_step }}</p>
+    <h2 class="h2" data-lines>{{ text|safe }}</h2>
     {% if sub %}<p class="lead" data-reveal>{{ sub }}</p>{% endif %}
-    <button class="btn btn--line" type="button" data-book data-reveal>{{ t.book }}</button>
+    <button class="btn btn--dark" type="button" data-book data-reveal>{{ t.book }}</button>
   </div>
 </section>
 {% endmacro %}
@@ -20,7 +43,7 @@
 {% macro crumbs(items) %}
 <nav class="crumbs" aria-label="Breadcrumb">
   {% for label, href in items %}
-    {% if href %}<a href="{{ href }}">{{ label }}</a><span aria-hidden="true">/</span>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}
+    {% if href %}<a href="{{ href }}">{{ label }}</a><span aria-hidden="true">·</span>{% else %}<span aria-current="page">{{ label }}</span>{% endif %}
   {% endfor %}
 </nav>
 {% endmacro %}

@@ -1,5 +1,29 @@
 # Dr. Giuseppe Colombo — website
 
+**Design “Luce naturale”** — written for patients first. Swiss luxury beauty: porcelain, nude, blush and soft gold;
+the arch (a window of light) frames every image; soft WebGL light fields; soft-focus → clarity reveals as the
+metaphor of a natural result. Homepage story: Light → Naturalezza → *What would you like to refine?* (concern
+chooser) → The journey (consultation → plan → surgery in Lugano → recovery → natural result) → Experience →
+Discretion → A window on Lugano → Begin with a conversation. Academic material lives on the Academy page.
+No artwork from the old site is used — only its content, photographs, books, papers and course posters.
+
+**Atmosphere images** (`lake-mist`, `lake-dusk`, `loggia`, `linen`, `silk`, `magnolia`, `water`) were generated with
+Google Stitch (project “Luce naturale imagery”). They show no people, patients, results, clinic or doctor — only
+mood. They are AI-generated: before launch, consider replacing the two Lake Lugano images with real photography
+of Lugano, and do not present them as photos of the clinic.
+
+**Anatomy plates** (`anat-*`: face layers, muscles of expression, outer ear, breast in profile, skin layers,
+facial profile, male chest) were also generated with Stitch, in a classical sepia-and-watercolour atlas style
+with no text inside the images. Captions come only from Dr. Colombo's own texts, and every plate is marked as an
+illustrative drawing, not a medical diagram. **Dr. Colombo should review them before launch** — AI anatomy can be
+stylised or imprecise. Mapping procedure → plate: `PROC_ANATOMY` in `content.py`.
+
+**Area photographs** (`cn-*`: face, eyes, lips, skin, ears, breast, restore) appear in “Where to begin” on the
+home page and at the top of every treatment page. They are AI-generated (Stitch) mood images of models, not
+patients and **not results**. Before launch, replace them with licensed or consented photography that keeps the
+same feel: warm window light, close crops, 3:4 portrait, at least 760×1018 (`assets/img/cn-<area>-760.webp`).
+Framing per image is set with `--pos` in `main.css` (`.larch--<area>`).
+
 A static, quietly luxurious rebuild of drgiuseppecolombo.com. It follows
 `../STORYLINE-AND-COMPONENT-DESIGN.md` and uses only the original site's own content.
 
@@ -53,16 +77,15 @@ After going live, point the domain in Cloudflare (Custom domains) and remove the
 | `content_it.py` | **Italian** (primary, served at `/`): the doctor's original texts. |
 | `content_de.py` | **German** (`/de/`): translated faithfully from the Italian. |
 | `content.py` | **English** (`/en/`) plus shared data (publications, posters, videos). Any key missing in IT/DE falls back to it. |
-| `build.py` | Static generator: pages, inline SVG drawings, anatomy and lake illustrations, sitemap. |
+| `build.py` | Static generator: pages in IT/DE/EN, arch monogram, sitemap, `_redirects`, `_headers`. |
 | `templates/` | Jinja templates: `home.html` (the 8 scenes), `procedure.html`, `area.html`, `philosophy.html`, `academy.html`, `journal.html`, `article.html`, `contact.html`, `reconstructive.html`, `404.html`. |
 | `assets/css/main.css` | Design system (tokens, typography, components, responsive, reduced motion). |
-| `assets/js/main.js` | Smooth scroll (Lenis), line drawing, reveals, header, menu, booking panel, page transitions, video and map facades, filters. |
-| `assets/js/home.js` | The homepage storyline: scroll-driven scenes 1–8. |
+| `assets/js/main.js` | Smooth scroll (Lenis), WebGL light fields (with CSS fallback), arch and soft-focus reveals, concern chooser, journey line, booking panel, page transitions, video and map facades, filters. |
+| `assets/js/home.js` | Homepage scenes: light, naturalezza (soft focus → clarity), window on Lugano. |
 | `assets/vendor/` | GSAP 3.13.0 + ScrollTrigger, Lenis 1.3.4 (self-hosted). |
-| `assets/fonts/` | Cormorant Garamond + Inter, self-hosted (no Google Fonts requests). |
+| `assets/fonts/` | Spectral (light, low-contrast reading serif) for headings + Nunito Sans (variable) for text — both self-hosted (OFL). |
 | `assets/img/` | Portraits, Atlas covers and course posters (WebP). |
-| `data/drawings/` | Dr. Colombo's line drawings, traced to vector paths. |
-| `tools/` | The scripts that prepared and traced the drawings (`prep_drawings.py`, `trace.js` with `potrace`). |
+| `data/journal.json` | The 11 original journal articles (Italian). |
 
 ## Where the content comes from
 

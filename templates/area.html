@@ -1,46 +1,48 @@
 {% extends "base.html" %}
-{% from "_macros.html" import cta, crumbs %}
+{% from "_macros.html" import cta, crumbs, lightarch, portrait %}
 {% block main %}
-<section class="phero">
-  <div class="wrap phero__grid">
-    <div class="phero__text">
+<section class="ph">
+  <div class="ph__bg" aria-hidden="true"></div>
+  <div class="wrap ph__grid">
+    <div>
       {{ crumbs([(t.home, P.home), (area.title, "")]) }}
-      <h1 class="phero__h" data-lines>{{ area.title }}</h1>
+      <p class="eyebrow" data-reveal>{{ L.concern_label }}</p>
+      <h1 class="h1" data-lines>{{ area.title }}</h1>
       <p class="lead" data-reveal>{{ area.lede }}</p>
-      <p class="phero__quote" data-reveal>“{{ area.intro }}” <span class="muted">— {{ t.dr }}</span></p>
+      <p class="ph__quote" data-reveal>“{{ area.intro }}” <span>— {{ t.dr }}</span></p>
     </div>
-    <div class="phero__art">{{ drawing(area.drawing, 'phero__ln', mode='load') }}</div>
+    {{ portrait(t, 'ph__arch', eager=True) }}
   </div>
 </section>
 
-{% for grp in groups %}
-<section class="plist">
-  <div class="wrap">
-    <p class="label" data-reveal>— {{ grp.title }}</p>
-    <div class="plist__grid">
-      {% for p in grp["items"] %}
-      <a class="pcard" href="{{ p.href }}" data-reveal>
-        <div class="pcard__art">{{ drawing(p.drawing, 'pcard__ln', mode='hover') }}</div>
-        <span class="pcard__n">{{ '%02d' % loop.index }}</span>
-        <h2 class="pcard__h">{{ p.title }}</h2>
-        <p class="pcard__sub">{{ p.subtitle }}</p>
-        <p class="pcard__p">{{ p.lede }}</p>
-        <span class="arrowlink">{{ t.discover }} <span aria-hidden="true">→</span></span>
-      </a>
-      {% endfor %}
+{% set ns = namespace(n=0) %}{% for key, plist in concerns %}{% if plist and procs_all[plist[0]].area == area.slug %}{% set ns.n = ns.n + 1 %}
+<section class="grp">
+  <div class="wrap grp__grid">
+    <div class="grp__head">
+      <span class="grp__n">0{{ ns.n }}</span>
+      <h2 class="h3" data-lines>{{ L.concerns[key][0] }}</h2>
+      <p class="muted" data-reveal>{{ L.concerns[key][1] }}</p>
     </div>
+    <ul class="cards">
+      {% for pk in plist %}{% set p = procs_all[pk] %}
+      <li data-reveal><a class="card" href="{{ p.href }}">
+        <span class="card__arch" aria-hidden="true"><span>{{ p.title[:1] }}</span></span>
+        <span class="card__t">{{ p.title }}</span>
+        <span class="card__s">{{ p.subtitle }}</span>
+        <span class="card__p">{{ p.lede }}</span>
+        <span class="link">{{ t.discover }} <span aria-hidden="true">→</span></span>
+      </a></li>
+      {% endfor %}
+    </ul>
   </div>
 </section>
-{% endfor %}
+{% endif %}{% endfor %}
 
 {% if area.slug == 'face' %}
 <section class="band">
   <div class="wrap band__inner">
-    <div>
-      <p class="label" data-reveal>{{ t.recon_label }}</p>
-      <h2 class="h2" data-lines>{{ t.recon_band }}</h2>
-    </div>
-    <a class="arrowlink" href="{{ P.reconstructive }}" data-reveal>{{ t.discover }} <span aria-hidden="true">→</span></a>
+    <div><p class="eyebrow" data-reveal>{{ t.recon_label }}</p><h2 class="h3" data-lines>{{ t.recon_band }}</h2></div>
+    <a class="btn btn--line" href="{{ P.reconstructive }}" data-reveal>{{ t.discover }}</a>
   </div>
 </section>
 {% endif %}

@@ -1,55 +1,57 @@
 {% extends "base.html" %}
-{% from "_macros.html" import crumbs %}
+{% from "_macros.html" import crumbs, arch %}
 {% block main %}
-<section class="phero phero--short">
-  <div class="wrap">
+<section class="ph">
+  <div class="ph__bg" aria-hidden="true"></div>
+  <div class="wrap ph__grid">
+    <div>
     {{ crumbs([(t.home, P.home), (t.contact, "")]) }}
-    <h1 class="phero__h" data-lines>{{ t.contact_h_html|safe }}</h1>
+    <p class="eyebrow" data-reveal>{{ t.first_step }}</p>
+    <h1 class="h1" data-lines>{{ t.contact_h_html|safe }}</h1>
     <p class="lead" data-reveal>{{ t.contact_lead.replace('{hours}', site.hours) }}</p>
-    <p data-reveal><button class="btn btn--line" type="button" data-book>{{ t.request_consult }}</button></p>
+    <p data-reveal><button class="btn btn--dark" type="button" data-book>{{ t.request_consult }}</button></p>
+    </div>
+    {{ arch('/assets/img/loggia-760.webp', '', 760, 510, 'ph__arch', eager=True) }}
   </div>
 </section>
-
 <section class="clocs">
   <div class="wrap clocs__grid">
     {% for loc in locations %}
-    <div class="lcard lcard--light" data-reveal>
-      <span class="label">— 0{{ loop.index }}</span>
-      <h2 class="lcard__h">{{ loc.city }}{% if loc.country %} <span class="muted">· {{ loc.country }}</span>{% endif %}</h2>
-      <p class="lcard__role">{{ loc.role }}</p>
+    <div class="loc loc--card" data-reveal>
+      <span class="loc__n">0{{ loop.index }}</span>
+      <h2 class="loc__h">{{ loc.city }}{% if loc.country %}<small> · {{ loc.country }}</small>{% endif %}</h2>
+      <p class="loc__role">{{ loc.role }}</p>
       {% for l in loc.lines %}<p>{{ l }}</p>{% endfor %}
-      {% if loc.extra %}<p class="muted">{{ loc.extra }}</p>{% endif %}
-      <button type="button" class="arrowlink" data-book data-book-location="{{ loc.key }}">{{ t.request_appt }} <span aria-hidden="true">→</span></button>
+      {% if loc.extra %}<p class="loc__x">{{ loc.extra }}</p>{% endif %}
+      <button type="button" class="link" data-book data-book-location="{{ loc.key }}">{{ t.request_appt }} <span aria-hidden="true">→</span></button>
     </div>
     {% endfor %}
   </div>
 </section>
-
 <section class="cdirect">
   <div class="wrap cdirect__grid">
     <div data-reveal>
-      <p class="label">{{ t.telephone }}</p>
-      {% for ph in site.phones %}<p class="cdirect__big"><a href="tel:{{ ph.tel }}">{{ ph.display }}</a> <span class="muted">{{ ph.label }}</span></p>{% endfor %}
-      <p class="muted">{{ site.hours }}</p>
+      <p class="eyebrow">{{ t.telephone }}</p>
+      {% for ph in site.phones %}<p class="cdirect__big"><a href="tel:{{ ph.tel }}">{{ ph.display }}</a> <small>{{ ph.label }}</small></p>{% endfor %}
+      <p class="cdirect__m">{{ site.hours }}</p>
     </div>
     <div data-reveal>
-      <p class="label">{{ t.email }}</p>
-      <p class="cdirect__big"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
-      <p class="muted">{{ t.info_appts }}</p>
+      <p class="eyebrow">{{ t.email }}</p>
+      <p class="cdirect__big cdirect__mail"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p class="cdirect__m">{{ t.info_appts }}</p>
       <p class="cdirect__mid"><a href="mailto:{{ site.email_training }}">{{ site.email_training }}</a></p>
-      <p class="muted">{{ t.fellow_courses }}</p>
+      <p class="cdirect__m">{{ t.fellow_courses }}</p>
     </div>
   </div>
 </section>
-
-<section class="map">
+<section class="mapsec">
   <div class="wrap">
-    <div class="map__box" data-map="{{ site.map_query }}">
-      {{ drawing('dash-arrow', 'map__ln', mode='enter') }}
-      <div class="map__inner">
-        <p class="label">— Clinica Sant'Anna · Lugano</p>
+    <div class="mapbox" data-map="{{ site.map_query }}">
+      <img class="mapbox__img" src="/assets/img/lake-mist-1264.webp" width="1264" height="848" alt="" loading="lazy">
+      <div class="mapbox__in">
+        <p class="eyebrow">Clinica Sant'Anna · Lugano</p>
         <p>{{ t.map_text }}</p>
-        <button type="button" class="btn btn--line" data-map-load>{{ t.show_map }}</button>
+        <button type="button" class="btn btn--light" data-map-load>{{ t.show_map }}</button>
       </div>
     </div>
   </div>
