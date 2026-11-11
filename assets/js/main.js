@@ -116,6 +116,7 @@
     var tl = gsap.timeline({ paused: true, delay: opts.delay || 0 });
     tl.fromTo(inner, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.6, ease: SILK }, 0);
     if (img) tl.fromTo(img, { scale: 1.18 }, { scale: 1, duration: 2.2, ease: SOFT }, 0);
+    if (img && fig.classList.contains('larch--photo')) tl.fromTo(img, { filter: 'blur(14px)' }, { filter: 'blur(0px)', duration: 1.8, ease: SOFT, clearProps: 'filter' }, .2);
     tl.fromTo(fig, { '--o': 0 }, { '--o': 1, duration: 1 }, .4);
     if (sweep) tl.fromTo(sweep, { xPercent: -130 }, { xPercent: 130, duration: 1.8, ease: 'power2.inOut' }, 1.1);
     return tl;
@@ -137,20 +138,38 @@
   function initConcerns() {
     qa('[data-concerns]').forEach(function (box) {
       var tabs = qa('[data-concern]', box), panels = qa('[data-panel]', box), current = tabs[0] && tabs[0].getAttribute('data-concern');
+      var leaving = null;
+      function reveal(p) {
+        if (reduce) return;
+        gsap.fromTo(p, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .9, ease: SOFT });
+        var arch = q('[data-arch]', p);
+        if (arch) {
+          gsap.set(q('.arch__in', arch), { clipPath: 'inset(0%)' });
+          var img = q('.larch__img', arch), words = qa('.larch__word, .larch__sub', arch), sw = q('.arch__sweep', arch);
+          /* soft focus → clarity, like the Naturalezza word */
+          if (img) gsap.fromTo(img, { scale: 1.14, filter: 'blur(16px)', opacity: .35 }, { scale: 1, filter: 'blur(0px)', opacity: 1, duration: 1.7, ease: SOFT, clearProps: 'filter' });
+          if (words.length) gsap.fromTo(words, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 1.1, ease: SOFT, stagger: .12, delay: .35 });
+          if (sw) gsap.fromTo(sw, { xPercent: -130 }, { xPercent: 130, duration: 1.8, ease: 'power2.inOut', delay: .25 });
+        }
+        gsap.fromTo(qa('li', p), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .8, ease: SOFT, stagger: .06, delay: .15 });
+      }
       function show(key, focus) {
         if (key === current) return;
         current = key;
         tabs.forEach(function (t) { var on = t.getAttribute('data-concern') === key; t.classList.toggle('is-active', on); t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on && focus) t.focus(); });
-        panels.forEach(function (p) {
-          var on = p.getAttribute('data-panel') === key;
-          p.hidden = !on; p.classList.toggle('is-active', on);
-          if (on && !reduce) {
-            gsap.fromTo(p, { opacity: 0, filter: 'blur(10px)', y: 14 }, { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1, ease: SOFT });
-            var arch = q('[data-arch]', p); if (arch) { gsap.set(q('.arch__in', arch), { clipPath: 'inset(0%)' }); var sw = q('.arch__sweep', arch); if (sw) gsap.fromTo(sw, { xPercent: -130 }, { xPercent: 130, duration: 1.6, ease: 'power2.inOut' }); }
-            gsap.fromTo(qa('li', p), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .8, ease: SOFT, stagger: .06, delay: .1 });
-          }
-        });
-        ST.refresh();
+        var next = panels.filter(function (p) { return p.getAttribute('data-panel') === key; })[0];
+        var prev = panels.filter(function (p) { return !p.hidden; })[0];
+        function swap() {
+          leaving = null;
+          panels.forEach(function (p) { var on = p === next; p.hidden = !on; p.classList.toggle('is-active', on); });
+          gsap.set(panels, { clearProps: 'opacity,filter' });
+          if (next) reveal(next);
+          ST.refresh();
+        }
+        if (leaving) leaving.kill();
+        /* the old image dissolves before the new one comes into focus */
+        if (!reduce && prev && prev !== next) leaving = gsap.to(prev, { opacity: 0, filter: 'blur(8px)', duration: .32, ease: 'power1.in', onComplete: swap });
+        else swap();
       }
       tabs.forEach(function (t, i) {
         t.tabIndex = i === 0 ? 0 : -1;

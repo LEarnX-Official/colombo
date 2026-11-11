@@ -671,3 +671,16 @@ html.js.no-motion [data-reveal], html.js.no-motion [data-lines], html.js.no-moti
 .anat__paper { overflow: hidden; }
 .anat__paper img { transform-origin: 50% 50%; }
 .anat__lens { width: 34%; height: auto; aspect-ratio: 1; top: 50%; left: 20%; box-shadow: 0 0 0 1px rgba(255, 248, 235, .5) inset, 0 0 0 9999px rgba(243, 235, 221, .28); background: radial-gradient(closest-side, rgba(255, 246, 228, .25), transparent); mix-blend-mode: normal; }
+
+/* ---------- Concern photographs: one soft image per area, slowly breathing ---------- */
+.larch--photo .arch__in { justify-content: flex-end; padding: 0 10% 11%; background: var(--nude); }
+.larch--photo .arch__in::after { background: linear-gradient(to top, rgba(251, 248, 244, .94) 0%, rgba(251, 248, 244, .62) 26%, rgba(251, 248, 244, 0) 54%); }
+.larch__ph { position: absolute; inset: 0; overflow: hidden; animation: larchDrift 18s ease-in-out infinite alternate; will-change: transform; }
+.larch__ph .larch__img { object-position: var(--pos, 50% 40%); }
+@keyframes larchDrift { from { transform: scale(1.04) translate3d(-1.2%, 1%, 0); } to { transform: scale(1.11) translate3d(1.2%, -1.4%, 0); } }
+.larch--face { --pos: 38% 42%; } .larch--eyes { --pos: 55% 40%; } .larch--lips { --pos: 50% 74%; } .larch--skin { --pos: 62% 40%; }
+.larch--ears { --pos: 34% 38%; } .larch--breast { --pos: 50% 62%; } .larch--restore { --pos: 66% 52%; }
+.larch--photo .larch__word { font-size: clamp(28px, 2.6vw, 42px); }
+.larch--photo .larch__sub { margin-top: 10px; font-size: 11.5px; color: var(--cocoa); opacity: .72; }
+@media (max-width: 640px) { .cn__arch.larch--photo { width: min(300px, 78vw); } }
+@media (prefers-reduced-motion: reduce) { .larch__ph { animation: none; } }

@@ -14,9 +14,9 @@
 {% macro portrait(t, cls="", eager=False) %}{{ arch('/assets/img/portrait-a-800.webp', t.portrait_alt, 1483, 1920, cls, srcset='/assets/img/portrait-a-800.webp 800w, /assets/img/portrait-a-1400.webp 1400w', eager=eager) }}{% endmacro %}
 
 {# ---------- Light arch (no image): a soft gradient window with a word ---------- #}
-{% macro lightarch(word, sub="", cls="") %}
-<div class="larch {{ cls }}" data-arch aria-hidden="true">
-  <div class="arch__in"><img class="larch__img" src="/assets/img/silk-760.webp" width="760" height="510" alt="" loading="lazy"><span class="larch__word">{{ word }}</span>{% if sub %}<span class="larch__sub">{{ sub }}</span>{% endif %}<span class="arch__sweep"></span></div>
+{% macro lightarch(word, sub="", cls="", img="") %}
+<div class="larch {{ cls }}{% if img %} larch--photo larch--{{ img }}{% endif %}" data-arch aria-hidden="true">
+  <div class="arch__in">{% if img %}<span class="larch__ph"><img class="larch__img" src="/assets/img/cn-{{ img }}-760.webp" width="760" height="1018" alt="" loading="lazy" decoding="async"></span>{% else %}<img class="larch__img" src="/assets/img/silk-760.webp" width="760" height="510" alt="" loading="lazy">{% endif %}<span class="larch__word">{{ word }}</span>{% if sub %}<span class="larch__sub">{{ sub }}</span>{% endif %}<span class="arch__sweep"></span></div>
 </div>
 {% endmacro %}
 

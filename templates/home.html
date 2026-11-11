@@ -59,7 +59,7 @@
       <div class="cn__stage">
         {% for key, plist in concerns %}
         <div class="cn__panel{% if loop.first %} is-active{% endif %}" role="tabpanel" id="cnp-{{ key }}" aria-labelledby="cnt-{{ key }}" data-panel="{{ key }}"{% if not loop.first %} hidden{% endif %}>
-          {{ lightarch(L.concerns[key][0], L.concerns[key][1], 'cn__arch') }}
+          {{ lightarch(L.concerns[key][0], L.concerns[key][1], 'cn__arch', key) }}
           <ul class="cn__list">
             {% if plist %}
               {% for pk in plist %}{% set p = procs[pk] %}

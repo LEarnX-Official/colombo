@@ -18,6 +18,12 @@ with no text inside the images. Captions come only from Dr. Colombo's own texts,
 illustrative drawing, not a medical diagram. **Dr. Colombo should review them before launch** — AI anatomy can be
 stylised or imprecise. Mapping procedure → plate: `PROC_ANATOMY` in `content.py`.
 
+**Area photographs** (`cn-*`: face, eyes, lips, skin, ears, breast, restore) appear in “Where to begin” on the
+home page and at the top of every treatment page. They are AI-generated (Stitch) mood images of models, not
+patients and **not results**. Before launch, replace them with licensed or consented photography that keeps the
+same feel: warm window light, close crops, 3:4 portrait, at least 760×1018 (`assets/img/cn-<area>-760.webp`).
+Framing per image is set with `--pos` in `main.css` (`.larch--<area>`).
+
 A static, quietly luxurious rebuild of drgiuseppecolombo.com. It follows
 `../STORYLINE-AND-COMPONENT-DESIGN.md` and uses only the original site's own content.
 
