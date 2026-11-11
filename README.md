@@ -77,7 +77,7 @@ After going live, point the domain in Cloudflare (Custom domains) and remove the
 | `assets/js/main.js` | Smooth scroll (Lenis), WebGL light fields (with CSS fallback), arch and soft-focus reveals, concern chooser, journey line, booking panel, page transitions, video and map facades, filters. |
 | `assets/js/home.js` | Homepage scenes: light, naturalezza (soft focus → clarity), window on Lugano. |
 | `assets/vendor/` | GSAP 3.13.0 + ScrollTrigger, Lenis 1.3.4 (self-hosted). |
-| `assets/fonts/` | Bodoni Moda (variable, optical sizes) + Jost (variable) — a Didone + Futura-style pairing from fashion and beauty print; self-hosted, OFL. |
+| `assets/fonts/` | Spectral (light, low-contrast reading serif) for headings + Nunito Sans (variable) for text — both self-hosted (OFL). |
 | `assets/img/` | Portraits, Atlas covers and course posters (WebP). |
 | `data/journal.json` | The 11 original journal articles (Italian). |
 

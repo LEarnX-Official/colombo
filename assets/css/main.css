@@ -1,13 +1,15 @@
 /* =========================================================================
    Dr. Giuseppe Colombo — "Luce naturale"
-   Swiss luxury beauty: porcelain, nude, blush, soft gold. Bodoni Moda + Jost.
+   Swiss luxury beauty: porcelain, nude, blush, soft gold. Spectral + Nunito Sans.
    Signature devices: the arch (a window of light), soft light fields,
    blur → focus reveals ("natural results"), light sweeps.
    ========================================================================= */
 
-@font-face { font-family: "Bodoni Moda"; font-style: normal; font-weight: 400 900; font-display: swap; src: url(/assets/fonts/bodoni-moda-latin-opsz-normal.woff2) format("woff2"); }
-@font-face { font-family: "Bodoni Moda"; font-style: italic; font-weight: 400 900; font-display: swap; src: url(/assets/fonts/bodoni-moda-latin-opsz-italic.woff2) format("woff2"); }
-@font-face { font-family: "Jost"; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/assets/fonts/jost-latin-wght-normal.woff2) format("woff2"); }
+@font-face { font-family: "Spectral"; font-style: normal; font-weight: 300; font-display: swap; src: url(/assets/fonts/spectral-latin-300-normal.woff2) format("woff2"); }
+@font-face { font-family: "Spectral"; font-style: italic; font-weight: 300; font-display: swap; src: url(/assets/fonts/spectral-latin-300-italic.woff2) format("woff2"); }
+@font-face { font-family: "Spectral"; font-style: normal; font-weight: 400 900; font-display: swap; src: url(/assets/fonts/spectral-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Spectral"; font-style: italic; font-weight: 400 900; font-display: swap; src: url(/assets/fonts/spectral-latin-400-italic.woff2) format("woff2"); }
+@font-face { font-family: "Nunito Sans"; font-style: normal; font-weight: 200 1000; font-display: swap; src: url(/assets/fonts/nunito-sans-latin-wght-normal.woff2) format("woff2"); }
 
 :root {
   --porcelain: #F7F2EC;
@@ -26,8 +28,8 @@
   --line: rgba(46, 33, 28, .12);
   --line-dark: rgba(247, 242, 236, .16);
 
-  --serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
-  --sans: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --sans: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
 
   --e-soft: cubic-bezier(.22, 1, .36, 1);
   --e-silk: cubic-bezier(.65, .05, .36, 1);
@@ -44,7 +46,7 @@
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
-body { margin: 0; background: var(--porcelain); color: var(--cocoa); font-family: var(--sans); font-size: 18px; line-height: 1.65; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip; }
+body { margin: 0; background: var(--porcelain); color: var(--cocoa); font-family: var(--sans); font-size: 17px; line-height: 1.7; font-weight: 400; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip; }
 img, svg, canvas { display: block; max-width: 100%; }
 img { height: auto; }
 a { color: inherit; text-decoration: none; }
@@ -62,7 +64,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
 /* ---------- Type ---------- */
-.h1, .h2, .h3, .h4, .hero__title, .nat__word, .lg__h, .ftr__big { font-family: var(--serif); font-weight: 400; font-optical-sizing: auto; letter-spacing: -.02em; }
+.h1, .h2, .h3, .h4, .hero__title, .nat__word, .lg__h, .ftr__big { font-family: var(--serif); font-weight: 300; letter-spacing: -.015em; }
+.h3, .h4 { font-weight: 400; letter-spacing: -.005em; }
 .h1 { font-size: clamp(48px, 7vw, 116px); line-height: 1; margin-bottom: .35em; }
 .h2 { font-size: clamp(38px, 5vw, 82px); line-height: 1.04; margin-bottom: .45em; }
 .h3 { font-size: clamp(30px, 3.2vw, 50px); line-height: 1.08; margin-bottom: .3em; }
